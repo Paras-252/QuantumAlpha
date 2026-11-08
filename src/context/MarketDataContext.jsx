@@ -123,6 +123,7 @@ export function MarketDataProvider({ children }) {
     } catch (e) {}
     return {
       apiKey: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_API_KEY) || '',
+      apiSecret: (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_KITE_API_SECRET || import.meta.env?.KITE_API_SECRET)) || '',
       accessToken: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_ACCESS_TOKEN) || '',
       mode: 'full',
       connectionMode: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_CONNECTION_MODE) || 'relay',
@@ -542,6 +543,76 @@ export function MarketDataProvider({ children }) {
     showToast('Simulation Paused', 'Frozen at last closing snapshot', 'info');
   };
 
+  // Generate daily access token from request_token
+  const generateKiteSession = async (reqToken, customApiKey = null, customApiSecret = null) => {
+    try {
+      showToast('Authenticating with Zerodha', 'Exchanging request_token for daily access token...', 'info');
+      const apiKey = customApiKey || zerodhaConfig.apiKey || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_API_KEY) || '';
+      const apiSecret = customApiSecret || zerodhaConfig.apiSecret || (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_KITE_API_SECRET || import.meta.env?.KITE_API_SECRET)) || '';
+
+      const res = await fetch('/api/kite/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          apiKey,
+          apiSecret,
+          requestToken: reqToken
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.status === 'success' && data.accessToken) {
+        const updated = {
+          ...zerodhaConfig,
+          apiKey,
+          apiSecret,
+          accessToken: data.accessToken,
+          userName: data.userName,
+          userId: data.userId
+        };
+        setZerodhaConfig(updated);
+        localStorage.setItem('tredye.zerodha.config', JSON.stringify(updated));
+        setIsZerodhaLive(true);
+        localStorage.setItem('tredye.zerodha.enabled', 'true');
+
+        if (kiteServiceRef.current) {
+          kiteServiceRef.current.updateConfig(updated);
+          kiteServiceRef.current.connect();
+        }
+
+        // Clean query parameters from URL
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.delete('request_token');
+          url.searchParams.delete('action');
+          url.searchParams.delete('status');
+          window.history.replaceState(null, '', url.pathname + url.search);
+        } catch (e) {}
+
+        showToast('⚡ Zerodha Connected', `Logged in as ${data.userName || data.userId || 'Trader'}. Streaming live ticks!`, 'success');
+        playAlertSound('success');
+        return { success: true, accessToken: data.accessToken };
+      } else {
+        showToast('Zerodha Token Exchange Failed', data.message || 'Invalid request token', 'error');
+        return { success: false, error: data.message };
+      }
+    } catch (err) {
+      showToast('Zerodha Connection Error', err.message, 'error');
+      return { success: false, error: err.message };
+    }
+  };
+
+  // Auto-detect redirect from Zerodha login in URL
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const reqToken = params.get('request_token');
+      if (reqToken) {
+        generateKiteSession(reqToken);
+      }
+    } catch (e) {}
+  }, []);
+
   // Fallback random-walk simulation tick when Kite Live is not active
   useEffect(() => {
     if (!isLiveSimulating || isZerodhaLive || isKiteSimulating) return;
@@ -690,6 +761,7 @@ export function MarketDataProvider({ children }) {
         startKiteSimulation,
         stopKiteSimulation,
         isKiteSimulating,
+        generateKiteSession,
         // Data
         indices,
         vix,

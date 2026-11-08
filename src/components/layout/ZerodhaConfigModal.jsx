@@ -33,11 +33,16 @@ export default function ZerodhaConfigModal() {
     zerodhaStats,
     startKiteSimulation,
     stopKiteSimulation,
-    isKiteSimulating
+    isKiteSimulating,
+    generateKiteSession
   } = useMarketData();
 
   const [apiKey, setApiKey] = useState(zerodhaConfig.apiKey || '');
+  const [apiSecret, setApiSecret] = useState(zerodhaConfig.apiSecret || '');
   const [accessToken, setAccessToken] = useState(zerodhaConfig.accessToken || '');
+  const [requestTokenInput, setRequestTokenInput] = useState('');
+  const [isGeneratingToken, setIsGeneratingToken] = useState(false);
+  const [tokenGenError, setTokenGenError] = useState('');
   const [mode, setMode] = useState(zerodhaConfig.mode || 'full');
   const [connectionMode, setConnectionMode] = useState(zerodhaConfig.connectionMode || 'relay');
   const [relayHost, setRelayHost] = useState(zerodhaConfig.relayHost || '');
@@ -45,10 +50,23 @@ export default function ZerodhaConfigModal() {
   const [showIpHelp, setShowIpHelp] = useState(true);
   const [copiedKey, setCopiedKey] = useState(false);
 
+  // Sync state if context updates
+  React.useEffect(() => {
+    if (zerodhaConfig.accessToken && zerodhaConfig.accessToken !== accessToken) {
+      setAccessToken(zerodhaConfig.accessToken);
+    }
+    if (zerodhaConfig.apiKey && zerodhaConfig.apiKey !== apiKey) {
+      setApiKey(zerodhaConfig.apiKey);
+    }
+    if (zerodhaConfig.apiSecret && zerodhaConfig.apiSecret !== apiSecret) {
+      setApiSecret(zerodhaConfig.apiSecret);
+    }
+  }, [zerodhaConfig]);
+
   if (!isZerodhaModalOpen) return null;
 
   const handleSaveAndConnect = () => {
-    updateZerodhaConfig({ apiKey, accessToken, mode, connectionMode, relayHost });
+    updateZerodhaConfig({ apiKey, apiSecret, accessToken, mode, connectionMode, relayHost });
     if (!isZerodhaLive) {
       toggleZerodhaLive(true);
     }
@@ -57,10 +75,27 @@ export default function ZerodhaConfigModal() {
   const handleToggleFeed = () => {
     const next = !isZerodhaLive;
     if (next) {
-      updateZerodhaConfig({ apiKey, accessToken, mode, connectionMode, relayHost });
+      updateZerodhaConfig({ apiKey, apiSecret, accessToken, mode, connectionMode, relayHost });
       toggleZerodhaLive(true);
     } else {
       toggleZerodhaLive(false);
+    }
+  };
+
+  const handleManualTokenGenerate = async () => {
+    if (!requestTokenInput.trim()) {
+      setTokenGenError('Please paste your request_token or full redirect URL');
+      return;
+    }
+    setIsGeneratingToken(true);
+    setTokenGenError('');
+    const res = await generateKiteSession(requestTokenInput.trim(), apiKey, apiSecret);
+    setIsGeneratingToken(false);
+    if (res.success) {
+      setAccessToken(res.accessToken);
+      setRequestTokenInput('');
+    } else {
+      setTokenGenError(res.error || 'Failed to generate access token');
     }
   };
 
@@ -170,20 +205,37 @@ export default function ZerodhaConfigModal() {
 
         {/* Credentials Form */}
         <div className="mt-5 space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* API Key */}
             <div>
               <label className="block text-xs font-bold text-foreground mb-1.5 flex items-center justify-between">
-                <span>Kite API Key (api_key)</span>
-                <span className="text-[10px] font-normal text-muted-foreground">From developers.kite.trade</span>
+                <span>Kite API Key</span>
+                <span className="text-[10px] font-normal text-muted-foreground">Permanent</span>
               </label>
               <div className="relative">
                 <input
                   type="text"
                   value={apiKey}
                   onChange={e => setApiKey(e.target.value.trim())}
-                  placeholder="e.g. 29xvyz98234jdf01"
-                  className="w-full rounded-xl border border-hairline bg-surface-2 px-3.5 py-2 text-xs font-mono font-medium text-foreground outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all placeholder:text-muted-foreground/50"
+                  placeholder="e.g. biqruu6ja6zvoka8"
+                  className="w-full rounded-xl border border-hairline bg-surface-2 px-3 py-2 text-xs font-mono font-medium text-foreground outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all placeholder:text-muted-foreground/50"
+                />
+              </div>
+            </div>
+
+            {/* API Secret */}
+            <div>
+              <label className="block text-xs font-bold text-foreground mb-1.5 flex items-center justify-between">
+                <span>Kite API Secret</span>
+                <span className="text-[10px] font-normal text-muted-foreground">Permanent</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="password"
+                  value={apiSecret}
+                  onChange={e => setApiSecret(e.target.value.trim())}
+                  placeholder="e.g. 5hmhgnkrq1nmp0z3..."
+                  className="w-full rounded-xl border border-hairline bg-surface-2 px-3 py-2 text-xs font-mono font-medium text-foreground outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all placeholder:text-muted-foreground/50"
                 />
               </div>
             </div>
@@ -191,18 +243,89 @@ export default function ZerodhaConfigModal() {
             {/* Access Token */}
             <div>
               <label className="block text-xs font-bold text-foreground mb-1.5 flex items-center justify-between">
-                <span>Daily Access Token (access_token)</span>
-                <span className="text-[10px] font-normal text-muted-foreground">Expires daily at 6 AM IST</span>
+                <span>Daily Access Token</span>
+                {accessToken ? (
+                  <span className="text-[10px] font-bold text-up flex items-center gap-0.5">
+                    <Check className="h-3 w-3" /> Active
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-normal text-warn">Needs Daily Login</span>
+                )}
               </label>
               <div className="relative">
                 <input
                   type="password"
                   value={accessToken}
                   onChange={e => setAccessToken(e.target.value.trim())}
-                  placeholder="e.g. j98adfkj23098sdfkj234..."
-                  className="w-full rounded-xl border border-hairline bg-surface-2 px-3.5 py-2 text-xs font-mono font-medium text-foreground outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all placeholder:text-muted-foreground/50"
+                  placeholder={accessToken ? 'Token active' : 'Click 1-Click Login below'}
+                  className={`w-full rounded-xl border px-3 py-2 text-xs font-mono font-medium outline-none transition-all placeholder:text-muted-foreground/50 ${
+                    accessToken
+                      ? 'border-up/40 bg-up/5 text-foreground'
+                      : 'border-hairline bg-surface-2 text-foreground focus:border-brand'
+                  }`}
                 />
               </div>
+            </div>
+          </div>
+
+          {/* 1-Click Token Generator Card */}
+          <div className="rounded-xl border border-[#ff5722]/30 bg-[#ff5722]/5 p-4 space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#ff5722] text-white font-bold text-xs">
+                    ⚡
+                  </span>
+                  <p className="font-heading text-sm font-bold text-foreground">
+                    Don't have an Access Token? Generate It in 1 Click
+                  </p>
+                </div>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  SEBI requires daily login. Because you have the <strong>API Key</strong> and <strong>API Secret</strong>, our terminal will exchange tokens automatically!
+                </p>
+              </div>
+
+              {/* 1-Click Login Button */}
+              <a
+                href={kiteLoginUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#ff5722] px-4 py-2 text-xs font-bold text-white shadow-md hover:bg-[#ea580c] transition-all"
+              >
+                <Key className="h-4 w-4" />
+                <span>1-Click Login with Kite ↗</span>
+              </a>
+            </div>
+
+            {/* Manual Request Token / Redirect URL Converter */}
+            <div className="border-t border-[#ff5722]/20 pt-3">
+              <p className="text-[11px] font-semibold text-foreground mb-1.5 flex items-center justify-between">
+                <span>Or Paste Redirect URL / request_token after login:</span>
+                <span className="text-[10px] text-muted-foreground font-normal">Auto-extracts token &amp; generates 24h session</span>
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  value={requestTokenInput}
+                  onChange={e => setRequestTokenInput(e.target.value)}
+                  placeholder="e.g. https://yourdomain.com/?request_token=abc123xyz... or paste request_token"
+                  className="flex-1 rounded-xl border border-hairline bg-surface-2 px-3 py-1.5 text-xs font-mono text-foreground outline-none focus:border-brand placeholder:text-muted-foreground/50"
+                />
+                <button
+                  type="button"
+                  disabled={isGeneratingToken}
+                  onClick={handleManualTokenGenerate}
+                  className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl bg-brand px-3.5 py-1.5 text-xs font-bold text-white hover:bg-brand-deep transition-all disabled:opacity-50"
+                >
+                  {isGeneratingToken ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Zap className="h-3.5 w-3.5" />}
+                  <span>{isGeneratingToken ? 'Generating...' : 'Generate Access Token'}</span>
+                </button>
+              </div>
+              {tokenGenError && (
+                <p className="text-[11px] text-down font-medium mt-1 flex items-center gap-1">
+                  <AlertTriangle className="h-3 w-3" /> {tokenGenError}
+                </p>
+              )}
             </div>
           </div>
 
