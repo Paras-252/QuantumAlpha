@@ -321,3 +321,4 @@ export const INITIAL_SIGNALS = [
     rationale: 'Consumer sector absorbed over ₹4,005 Cr with TITAN and Kalyan leading. Massive short covering observed above 3,400. Clear trajectory to 3,510 target.'
   }
 ];
+

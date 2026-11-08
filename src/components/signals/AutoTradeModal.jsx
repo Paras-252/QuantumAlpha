@@ -289,3 +289,4 @@ export default function AutoTradeModal({ signal, isOpen, onClose }) {
     </div>
   );
 }
+

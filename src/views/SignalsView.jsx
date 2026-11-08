@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useMarketData } from '../context/MarketDataContext';
 import { INITIAL_SIGNALS, QUANT_STRATEGIES } from '../data/signalsData';
 import AutoTradeModal from '../components/signals/AutoTradeModal';
+import HedgeStrategyCalculator from '../components/signals/HedgeStrategyCalculator';
 import Badge from '../components/common/Badge';
 import {
   Zap,
@@ -386,6 +387,9 @@ export default function SignalsView() {
         </div>
       </div>
 
+      {/* 5. 90%+ Probability of Profit Hedged Trade & Regulatory Charges Calculator */}
+      <HedgeStrategyCalculator />
+
       {/* Auto Trade Execution Modal */}
       {selectedSignal && (
         <AutoTradeModal
@@ -397,3 +401,4 @@ export default function SignalsView() {
     </div>
   );
 }
+

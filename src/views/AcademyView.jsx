@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
+import HedgeStrategyCalculator from '../components/signals/HedgeStrategyCalculator';
 import { ACADEMY_MODULES } from '../data/marketData';
 import {
   GraduationCap,
@@ -184,6 +185,9 @@ export default function AcademyView() {
           </div>
         </div>
       </Card>
+
+      {/* 90%+ Probability of Profit Hedging & Indian Regulatory Charges Calculator */}
+      <HedgeStrategyCalculator />
 
       {/* Curriculum Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
