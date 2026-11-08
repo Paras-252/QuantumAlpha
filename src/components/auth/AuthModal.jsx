@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useMarketData } from '../../context/MarketDataContext';
+import QuantumAlphaLogo from '../common/QuantumAlphaLogo';
 import {
   Lock,
   Mail,
@@ -81,11 +82,8 @@ export default function AuthModal() {
 
         {/* Brand Header */}
         <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-deep to-brand text-white shadow-glow">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
-              <path d="M12 2L2 9.5L12 17L22 9.5L12 2Z" opacity="0.9" />
-              <path d="M12 17L4.5 11.5L2 13.5L12 21L22 13.5L19.5 11.5L12 17Z" />
-            </svg>
+          <div className="mx-auto mb-3 flex items-center justify-center">
+            <QuantumAlphaLogo size="lg" />
           </div>
           <h2 className="font-heading text-xl font-bold tracking-tight">
             {mode === 'login' ? 'Sign in to Quantum Alpha' : 'Create Free Quantum Alpha Account'}
