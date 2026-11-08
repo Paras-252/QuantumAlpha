@@ -121,7 +121,13 @@ export function MarketDataProvider({ children }) {
       const saved = localStorage.getItem('tredye.zerodha.config');
       if (saved) return JSON.parse(saved);
     } catch (e) {}
-    return { apiKey: '', accessToken: '', mode: 'full', connectionMode: 'relay', relayHost: '' };
+    return {
+      apiKey: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_API_KEY) || '',
+      accessToken: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_ACCESS_TOKEN) || '',
+      mode: 'full',
+      connectionMode: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_CONNECTION_MODE) || 'relay',
+      relayHost: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_RELAY_HOST) || ''
+    };
   });
   const [zerodhaStatus, setZerodhaStatus] = useState('DISCONNECTED');
   const [zerodhaStatusMessage, setZerodhaStatusMessage] = useState('');
