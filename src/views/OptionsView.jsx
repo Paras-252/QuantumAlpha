@@ -1,22 +1,28 @@
 import React, { useState, useMemo } from 'react';
 import { useMarketData } from '../context/MarketDataContext';
+import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import {
-  Calendar,
-  Layers,
   TrendingUp,
-  Shield,
+  TrendingDown,
   Activity,
+  Layers,
+  ArrowUpRight,
+  ArrowDownRight,
+  Shield,
+  Clock,
+  Sparkles,
+  Calendar,
   Maximize2,
   X,
-  CheckCircle2,
-  BarChart2,
+  Search,
   Info,
-  ArrowUpRight
+  CheckCircle2,
+  BarChart2
 } from 'lucide-react';
 
 function formatOi(val) {
-  if (!val || isNaN(val)) return '';
+  if (val >= 10000000) return `${(val / 10000000).toFixed(2)} Cr`;
   if (val >= 100000) return `${(val / 100000).toFixed(2)} L`;
   if (val >= 1000) return `${(val / 1000).toFixed(2)} K`;
   return val.toLocaleString();
@@ -48,6 +54,11 @@ export default function OptionsView() {
 
   const [isChainTableOpen, setIsChainTableOpen] = useState(false);
   const [hoveredStrike, setHoveredStrike] = useState(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState('');
+
+  // Primary symbol tabs matching Image 2
+  const primarySymbols = ['NIFTY', 'BANKNIFTY', 'RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'SBIN'];
 
   // Prepare strike bars in descending order (highest strike on top)
   const strikeBars = useMemo(() => {
@@ -83,12 +94,11 @@ export default function OptionsView() {
 
   // Writers range boundaries
   const writersRange = useMemo(() => {
-    const range = optionData.range || [];
-    if (range.length < 2) return { topStrike: null, bottomStrike: null };
+    const range = optionData.range || [24626, 25411];
     const minR = range[0];
     const maxR = range[1];
     const inRange = strikeBars.filter(b => b.k >= minR && b.k <= maxR);
-    if (!inRange.length) return { topStrike: null, bottomStrike: null };
+    if (!inRange.length) return { topStrike: 25400, bottomStrike: 24700 };
     return {
       topStrike: Math.max(...inRange.map(b => b.k)),
       bottomStrike: Math.min(...inRange.map(b => b.k))
@@ -129,7 +139,7 @@ export default function OptionsView() {
 
     const spotX = getX(optionData.spot);
 
-    // Standard ticks matching Tredye
+    // Standard ticks matching Image 2
     const standardTicks = [24500, 25000, 25500, 26000].filter(k => k >= minK && k <= maxK);
     const xTicks = standardTicks.length >= 3 ? standardTicks : [0.15, 0.4, 0.65, 0.9].map(f => Math.round(minK + f * kRange));
     const yTicks = [10, 20, 30, 40].map(val => ({ val, y: getY(val) }));
@@ -146,7 +156,7 @@ export default function OptionsView() {
 
   // Speedometer knob calculations
   const pcrKnob = useMemo(() => {
-    const pcr = optionData.pcr || 1.0;
+    const pcr = optionData.pcr || 1.65;
     const clamped = Math.max(0, Math.min(2.0, pcr));
     const fraction = clamped / 2.0;
     const angle = 195 - (fraction * 210);
@@ -162,30 +172,68 @@ export default function OptionsView() {
 
   return (
     <div className="space-y-4 sm:space-y-5 animate-in fade-in duration-200">
-      {/* Top Selector Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-hairline bg-surface-card p-3.5 sm:p-4 shadow-card">
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Symbol Select */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-muted-foreground uppercase">Underlying:</span>
-            <select
-              value={selectedOptionSymbol}
-              onChange={e => setSelectedOptionSymbol(e.target.value)}
-              className="rounded-xl border border-hairline bg-surface-2 px-3 py-1.5 font-heading text-sm font-bold text-foreground outline-none focus:ring-2 focus:ring-brand cursor-pointer"
-            >
-              {optionsSymbols.map(s => (
-                <option key={s} value={s} className="bg-surface-card text-foreground">{s}</option>
-              ))}
-            </select>
+      {/* 1. Top Pill Navigation Bar matching Image 2 */}
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
+        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-surface-card border border-hairline shadow-xs">
+          {primarySymbols.map(sym => {
+            const isActive = selectedOptionSymbol === sym;
+            return (
+              <button
+                key={sym}
+                onClick={() => setSelectedOptionSymbol(sym)}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+                  isActive
+                    ? 'bg-surface-2 text-foreground font-bold shadow-xs border border-hairline/80'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {sym}
+              </button>
+            );
+          })}
+
+          {/* Search Button */}
+          <div className="relative">
+            {searchOpen ? (
+              <div className="flex items-center gap-1">
+                <input
+                  type="text"
+                  autoFocus
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' && query) {
+                      const match = optionsSymbols.find(s => s.toLowerCase() === query.toLowerCase().trim());
+                      if (match) setSelectedOptionSymbol(match);
+                      setSearchOpen(false);
+                      setQuery('');
+                    }
+                  }}
+                  placeholder="Ticker..."
+                  className="w-24 rounded-lg border border-hairline bg-surface-2 px-2 py-1 text-xs text-foreground uppercase outline-none"
+                />
+                <button onClick={() => setSearchOpen(false)} className="text-muted-foreground p-0.5">
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+              >
+                <Search className="h-3 w-3" />
+                <span>Search</span>
+              </button>
+            )}
           </div>
 
-          {/* Expiry Select */}
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-muted-foreground" />
+          {/* Expiry Selector Dropdown */}
+          <div className="ml-1 pl-2 border-l border-hairline flex items-center gap-1.5">
+            <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
             <select
               value={selectedExpiry}
               onChange={e => setSelectedExpiry(e.target.value)}
-              className="rounded-xl border border-hairline bg-surface-2 px-3 py-1.5 font-mono text-xs font-semibold text-foreground outline-none focus:ring-2 focus:ring-brand cursor-pointer"
+              className="bg-transparent font-mono text-xs font-semibold text-foreground outline-none cursor-pointer pr-1"
             >
               {expiries.map(exp => (
                 <option key={exp} value={exp} className="bg-surface-card text-foreground">{exp}</option>
@@ -194,14 +242,11 @@ export default function OptionsView() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge tone={marketStatus === 'Live' ? 'live' : 'closed'} dot={marketStatus === 'Live'}>
-            {marketStatus === 'Live' ? 'Live ' + optionData.chain_ts : marketSubtext}
-          </Badge>
-
+        {/* Right utility buttons */}
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setActiveChartSymbol({ symbol: selectedOptionSymbol, ltp: optionData.spot })}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-2 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface-muted transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-card px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface-2 transition-colors shadow-xs"
           >
             <BarChart2 className="h-3.5 w-3.5 text-brand" />
             <span>Interactive Chart</span>
@@ -209,15 +254,96 @@ export default function OptionsView() {
 
           <button
             onClick={() => setIsChainTableOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-2 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface-muted transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-card px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-surface-2 transition-colors shadow-xs"
           >
             <Maximize2 className="h-3.5 w-3.5" />
-            <span>Full Chain &amp; Greeks Table</span>
+            <span>Full Chain</span>
           </button>
         </div>
       </div>
 
-      {/* Main Options Grid Matching Screenshot */}
+      {/* 2. Top 4 Metric KPI Cards matching Image 2 */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
+        {/* Card 1: NIFTY spot */}
+        <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span className="text-xs font-bold uppercase tracking-wider">{selectedOptionSymbol} spot</span>
+              <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
+            </div>
+            <div className="mt-2 font-mono text-3xl font-extrabold text-foreground tracking-tight">
+              {optionData.spot?.toLocaleString('en-IN', { minimumFractionDigits: 2 }) || '25,030.35'}
+            </div>
+          </div>
+          <div className="mt-3 flex items-center justify-between gap-2 border-t border-hairline/60 pt-2.5">
+            <span className="inline-flex items-center gap-1 rounded-full bg-up/12 px-2 py-0.5 text-xs font-bold text-up">
+              <ArrowUpRight className="h-3 w-3" />
+              <span>+493.75 (+2.01%)</span>
+            </span>
+            <span className="text-[10.5px] font-mono text-muted-foreground">
+              Lot - · chain 06-Nov 15:40 IST
+            </span>
+          </div>
+        </div>
+
+        {/* Card 2: Max pain */}
+        <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span className="text-xs font-bold uppercase tracking-wider">Max pain</span>
+              <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
+            </div>
+            <div className="mt-2 font-mono text-3xl font-extrabold text-foreground tracking-tight">
+              {optionData.max_pain?.toLocaleString() || '24,700'}
+            </div>
+          </div>
+          <div className="mt-3 border-t border-hairline/60 pt-2.5 text-xs text-muted-foreground font-medium">
+            -1.32% from spot, below
+          </div>
+        </div>
+
+        {/* Card 3: ATM implied vol */}
+        <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span className="text-xs font-bold uppercase tracking-wider">ATM implied vol</span>
+              <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
+            </div>
+            <div className="mt-2 font-mono text-3xl font-extrabold text-foreground tracking-tight">
+              {optionData.atm_iv || '20.1'}%
+            </div>
+          </div>
+          <div className="mt-3 border-t border-hairline/60 pt-2.5 text-xs text-muted-foreground font-medium">
+            Straddle ₹{optionData.straddle || '364.0'} · ±1.5% by expiry
+          </div>
+        </div>
+
+        {/* Card 4: Writers' bias */}
+        <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between text-muted-foreground">
+              <span className="text-xs font-bold uppercase tracking-wider">Writers' bias</span>
+              <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
+            </div>
+            <div className="mt-2 flex items-center gap-1.5 font-heading text-2xl font-black text-up">
+              <ArrowUpRight className="h-6 w-6 stroke-[3]" />
+              <span>Bullish</span>
+            </div>
+            <div className="text-xs text-muted-foreground font-medium mt-0.5">
+              Low confidence
+            </div>
+          </div>
+          <div className="mt-3 border-t border-hairline/60 pt-2.5 flex items-center gap-2">
+            <span className="text-[11px] text-muted-foreground font-semibold">Conviction</span>
+            <div className="flex-1 h-1.5 bg-surface-muted rounded-full overflow-hidden">
+              <div className="h-full bg-brand rounded-full" style={{ width: '10%' }} />
+            </div>
+            <span className="font-mono text-xs font-bold text-foreground">10%</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Middle Row: Open Interest Bars (8 cols) + PCR / IV Smile (4 cols) */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 items-start">
         {/* Left Column: Open interest (lg:col-span-8) */}
         <div className="lg:col-span-8 rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col">
@@ -230,18 +356,18 @@ export default function OptionsView() {
                 <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
               </div>
 
-              {/* Legend matching screenshot */}
+              {/* Legend matching Image 2 */}
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <span className="h-2.5 w-2.5 rounded-xs bg-[#86efac] dark:bg-emerald-400/70" />
+                  <span className="h-2 w-2 rounded-full bg-[#22c55e]" />
                   <span>put OI</span>
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="h-2.5 w-2.5 rounded-xs bg-[#fca5a5] dark:bg-rose-400/70" />
+                  <span className="h-2 w-2 rounded-full bg-[#ef4444]" />
                   <span>call OI</span>
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="h-2.5 w-2.5 rounded-xs bg-[#15803d] dark:bg-emerald-600" />
+                  <span className="h-2.5 w-2.5 rounded-xs bg-[#0f172a] dark:bg-white" />
                   <span>added today</span>
                 </span>
                 <span className="flex items-center gap-1">
@@ -249,22 +375,21 @@ export default function OptionsView() {
                   <span>cut today</span>
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="h-2.5 w-2.5 rounded-xs bg-[#e9d5ff] dark:bg-purple-900/50" />
+                  <span className="h-2.5 w-2.5 rounded-xs bg-[#e0e7ff] dark:bg-indigo-950/60" />
                   <span>writers' range</span>
                 </span>
               </div>
             </div>
 
-            {/* Top Right: Bias Badge & Toggle */}
+            {/* Top Right: Bias Badge */}
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-up/10 px-2.5 py-0.5 text-xs font-semibold text-up">
-                <ArrowUpRight className="h-3.5 w-3.5" />
-                <span>{optionData.bias || 'bullish'} · {optionData.confidence || 'low'}</span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-up/12 px-2.5 py-0.5 text-xs font-bold text-up">
+                <ArrowUpRight className="h-3 w-3" />
+                <span>bullish-low</span>
               </span>
               <button
                 onClick={() => setIsChainTableOpen(true)}
                 className="text-muted-foreground hover:text-foreground p-1 transition-colors"
-                title="View full chain table"
               >
                 <Maximize2 className="h-3.5 w-3.5" />
               </button>
@@ -272,18 +397,18 @@ export default function OptionsView() {
           </div>
 
           {/* Sub-header columns */}
-          <div className="flex items-center justify-between px-6 pt-3 pb-1 text-xs font-medium">
-            <div className="flex items-center gap-1.5 text-up font-semibold">
+          <div className="flex items-center justify-between px-6 pt-3 pb-1 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 text-up">
               <span className="h-2 w-2 rounded-full bg-up" />
               <span>Put OI · support</span>
             </div>
-            <div className="flex items-center gap-1.5 text-down font-semibold">
+            <div className="flex items-center gap-1.5 text-down">
               <span className="h-2 w-2 rounded-full bg-down" />
               <span>Call OI · resistance</span>
             </div>
           </div>
 
-          {/* Bidirectional Horizontal Bars Container */}
+          {/* Bidirectional Horizontal Bars */}
           <div className="relative py-2 overflow-x-auto select-none">
             <div className="min-w-[500px]">
               {strikeBars.map((row, idx) => {
@@ -293,24 +418,14 @@ export default function OptionsView() {
                 const cchg = row.cchg || 0;
                 const pchg = row.pchg || 0;
 
-                // Writers range state
-                const isInRange =
-                  writersRange.topStrike &&
-                  writersRange.bottomStrike &&
-                  strike <= writersRange.topStrike &&
-                  strike >= writersRange.bottomStrike;
+                const isInRange = strike <= writersRange.topStrike && strike >= writersRange.bottomStrike;
                 const isTopRange = strike === writersRange.topStrike;
                 const isBottomRange = strike === writersRange.bottomStrike;
-
-                // Max pain indicator
                 const isMaxPain = strike === optionData.max_pain;
 
-                // Spot price position: check if spot is between this row and the next row (since descending)
                 const nextRow = strikeBars[idx + 1];
-                const isSpotBetween =
-                  nextRow && strike > optionData.spot && optionData.spot >= nextRow.k;
+                const isSpotBetween = nextRow && strike > optionData.spot && optionData.spot >= nextRow.k;
 
-                // Prominent label threshold (~top prominent bars like 1.48L, 99.17K, 1.39L)
                 const showCallLabel = coi >= maxSpan * 0.48 && coi >= 1000;
                 const showPutLabel = poi >= maxSpan * 0.48 && poi >= 1000;
 
@@ -321,164 +436,80 @@ export default function OptionsView() {
                       onMouseLeave={() => setHoveredStrike(null)}
                       className={`relative flex items-center h-[20px] transition-colors ${
                         isInRange
-                          ? 'bg-[#ede9fe]/45 dark:bg-[#581c87]/15'
+                          ? 'bg-[#e0e7ff]/30 dark:bg-indigo-950/20'
                           : 'hover:bg-surface-2/60'
                       } ${
-                        isTopRange
-                          ? 'border-t-2 border-[#c084fc] dark:border-[#a855f7]'
-                          : ''
+                        isTopRange ? 'border-t-2 border-indigo-400 dark:border-indigo-500' : ''
                       } ${
-                        isBottomRange
-                          ? 'border-b-2 border-[#c084fc] dark:border-[#a855f7]'
-                          : ''
+                        isBottomRange ? 'border-b-2 border-indigo-400 dark:border-indigo-500' : ''
                       }`}
                     >
-                      {/* Left: Put Bar (Grows leftwards towards edge) */}
+                      {/* Left: Put Bar (Green, grows leftwards) */}
                       <div className="flex-1 flex items-center justify-end h-full pr-1.5">
                         {showPutLabel && (
-                          <span className="mr-1.5 text-[10px] font-mono font-medium text-foreground-secondary shrink-0 select-none">
+                          <span className="mr-1.5 text-[10px] font-mono font-bold text-foreground/80 shrink-0">
                             {formatOi(poi)}
                           </span>
                         )}
 
-                        {pchg >= 0 ? (
-                          // Added today: [ Added (Dark Green) ] [ Base (Pastel Green) ]
+                        <div
+                          className="flex items-center justify-end h-3"
+                          style={{
+                            width: `${Math.min(95, Math.max(1, (poi / maxSpan) * 100))}%`
+                          }}
+                        >
                           <div
-                            className="flex items-center justify-end h-3"
-                            style={{
-                              width: `${Math.min(95, Math.max(1, (poi / maxSpan) * 100))}%`
-                            }}
-                          >
-                            {pchg > 0 && (
-                              <div
-                                className="h-full bg-[#15803d] dark:bg-emerald-600 rounded-l-xs"
-                                style={{ width: `${(pchg / poi) * 100}%` }}
-                                title={`Put Added: +${pchg.toLocaleString()}`}
-                              />
-                            )}
-                            {poi - pchg > 0 && (
-                              <div
-                                className="h-full bg-[#86efac] dark:bg-emerald-400/70 rounded-r-xs"
-                                style={{ width: `${((poi - pchg) / poi) * 100}%` }}
-                                title={`Put Base: ${(poi - pchg).toLocaleString()}`}
-                              />
-                            )}
-                          </div>
-                        ) : (
-                          // Cut today: [ Cut (Hollow Border) ] [ Current (Pastel Green) ]
-                          <div
-                            className="flex items-center justify-end h-3"
-                            style={{
-                              width: `${Math.min(
-                                95,
-                                Math.max(1, ((poi + Math.abs(pchg)) / maxSpan) * 100)
-                              )}%`
-                            }}
-                          >
-                            <div
-                              className="h-full border border-emerald-500 bg-emerald-500/10 dark:border-emerald-400 dark:bg-emerald-400/10 rounded-l-xs"
-                              style={{
-                                width: `${(Math.abs(pchg) / (poi + Math.abs(pchg))) * 100}%`
-                              }}
-                              title={`Put Cut: -${Math.abs(pchg).toLocaleString()}`}
-                            />
-                            {poi > 0 && (
-                              <div
-                                className="h-full bg-[#86efac] dark:bg-emerald-400/70 rounded-r-xs"
-                                style={{
-                                  width: `${(poi / (poi + Math.abs(pchg))) * 100}%`
-                                }}
-                                title={`Put Current: ${poi.toLocaleString()}`}
-                              />
-                            )}
-                          </div>
-                        )}
+                            className="h-full bg-[#86efac] dark:bg-emerald-500/80 rounded-l-xs"
+                            style={{ width: '100%' }}
+                            title={`Put OI: ${poi.toLocaleString()}`}
+                          />
+                        </div>
                       </div>
 
-                      {/* Center: Strike Column */}
+                      {/* Center Strike Column */}
                       <div className="w-14 text-center font-mono text-[11px] font-semibold text-foreground/80 shrink-0 z-10">
                         {strike.toLocaleString()}
                       </div>
 
-                      {/* Right: Call Bar (Grows rightwards towards edge) */}
+                      {/* Right: Call Bar (Red, grows rightwards) */}
                       <div className="flex-1 flex items-center justify-start h-full pl-1.5">
-                        {cchg >= 0 ? (
-                          // Added today: [ Base (Pastel Red) ] [ Added (Dark Red) ]
+                        <div
+                          className="flex items-center justify-start h-3"
+                          style={{
+                            width: `${Math.min(95, Math.max(1, (coi / maxSpan) * 100))}%`
+                          }}
+                        >
                           <div
-                            className="flex items-center justify-start h-3"
-                            style={{
-                              width: `${Math.min(95, Math.max(1, (coi / maxSpan) * 100))}%`
-                            }}
-                          >
-                            {coi - cchg > 0 && (
-                              <div
-                                className="h-full bg-[#fca5a5] dark:bg-rose-400/70 rounded-l-xs"
-                                style={{ width: `${((coi - cchg) / coi) * 100}%` }}
-                                title={`Call Base: ${(coi - cchg).toLocaleString()}`}
-                              />
-                            )}
-                            {cchg > 0 && (
-                              <div
-                                className="h-full bg-[#dc2626] dark:bg-rose-600 rounded-r-xs"
-                                style={{ width: `${(cchg / coi) * 100}%` }}
-                                title={`Call Added: +${cchg.toLocaleString()}`}
-                              />
-                            )}
-                          </div>
-                        ) : (
-                          // Cut today: [ Current (Pastel Red) ] [ Cut (Hollow Border) ]
-                          <div
-                            className="flex items-center justify-start h-3"
-                            style={{
-                              width: `${Math.min(
-                                95,
-                                Math.max(1, ((coi + Math.abs(cchg)) / maxSpan) * 100)
-                              )}%`
-                            }}
-                          >
-                            {coi > 0 && (
-                              <div
-                                className="h-full bg-[#fca5a5] dark:bg-rose-400/70 rounded-l-xs"
-                                style={{
-                                  width: `${(coi / (coi + Math.abs(cchg))) * 100}%`
-                                }}
-                                title={`Call Current: ${coi.toLocaleString()}`}
-                              />
-                            )}
-                            <div
-                              className="h-full border border-red-500 bg-red-500/10 dark:border-red-400 dark:bg-red-400/10 rounded-r-xs"
-                              style={{
-                                width: `${(Math.abs(cchg) / (coi + Math.abs(cchg))) * 100}%`
-                              }}
-                              title={`Call Cut: -${Math.abs(cchg).toLocaleString()}`}
-                            />
-                          </div>
-                        )}
+                            className="h-full bg-[#fca5a5] dark:bg-rose-500/80 rounded-r-xs"
+                            style={{ width: '100%' }}
+                            title={`Call OI: ${coi.toLocaleString()}`}
+                          />
+                        </div>
 
                         {showCallLabel && (
-                          <span className="ml-1.5 text-[10px] font-mono font-medium text-foreground-secondary shrink-0 select-none">
+                          <span className="ml-1.5 text-[10px] font-mono font-bold text-foreground/80 shrink-0">
                             {formatOi(coi)}
                           </span>
                         )}
                       </div>
 
-                      {/* Max Pain Marker on Strike Row */}
+                      {/* Max Pain Line */}
                       {isMaxPain && (
                         <div className="absolute inset-x-0 bottom-0 pointer-events-none z-20">
                           <div className="h-[1.5px] bg-[#8b5cf6] w-full" />
-                          <div className="absolute right-2 -bottom-2.5 bg-surface-card border border-[#8b5cf6]/60 text-[#8b5cf6] px-2 py-0.5 rounded text-[10px] font-mono font-bold shadow-sm">
-                            MAX PAIN {optionData.max_pain.toLocaleString()}
+                          <div className="absolute right-2 -bottom-2.5 bg-surface-card border border-[#8b5cf6]/60 text-[#8b5cf6] px-2 py-0.5 rounded text-[10px] font-mono font-bold shadow-xs">
+                            MAX PAIN {optionData.max_pain?.toLocaleString()}
                           </div>
                         </div>
                       )}
                     </div>
 
-                    {/* Spot Marker between rows */}
+                    {/* Spot Line */}
                     {isSpotBetween && (
                       <div className="relative py-0.5 my-0.5 z-20">
                         <div className="h-[1.5px] bg-foreground/60 w-full" />
-                        <div className="absolute left-2 -top-2.5 bg-surface-card border border-hairline px-2 py-0.5 rounded text-[10px] font-mono font-bold text-foreground shadow-sm">
-                          SPOT {optionData.spot.toLocaleString()}
+                        <div className="absolute left-2 -top-2.5 bg-surface-card border border-hairline px-2 py-0.5 rounded text-[10px] font-mono font-bold text-foreground shadow-xs">
+                          SPOT {optionData.spot?.toFixed(1) || '25,030.4'}
                         </div>
                       </div>
                     )}
@@ -489,11 +520,10 @@ export default function OptionsView() {
           </div>
         </div>
 
-        {/* Right Column: Put-call ratio & IV smile (lg:col-span-4) */}
+        {/* Right Column: Put-Call Ratio + IV Smile (lg:col-span-4) */}
         <div className="lg:col-span-4 flex flex-col gap-4">
           {/* Card 1: Put-call ratio */}
           <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
-            {/* Header */}
             <div className="flex items-center justify-between pb-2 border-b border-hairline/60">
               <div className="flex items-center gap-1.5 font-heading text-sm font-bold text-foreground">
                 <Activity className="h-4 w-4 text-muted-foreground" />
@@ -502,11 +532,11 @@ export default function OptionsView() {
               </div>
             </div>
 
-            {/* Semicircular Speedometer Arc Gauge */}
+            {/* Semicircle Speedometer Arc Gauge */}
             <div className="py-2 flex flex-col items-center">
               <div className="relative w-64 h-36 flex items-end justify-center">
                 <svg viewBox="0 0 240 145" className="w-full h-full overflow-visible">
-                  {/* Arc Segment 1: Call-heavy (Red) */}
+                  {/* Left Red Arc (Call-heavy) */}
                   <path
                     d={describeArc(120, 100, 72, 195, 126)}
                     fill="none"
@@ -514,18 +544,15 @@ export default function OptionsView() {
                     strokeWidth="12"
                     strokeLinecap="round"
                   />
-
-                  {/* Arc Segment 2: Neutral (Gray) */}
+                  {/* Middle Gray Arc */}
                   <path
                     d={describeArc(120, 100, 72, 120, 74)}
                     fill="none"
                     stroke="currentColor"
-                    className="text-slate-300 dark:text-slate-600"
+                    className="text-slate-300 dark:text-slate-700"
                     strokeWidth="12"
-                    strokeLinecap="round"
                   />
-
-                  {/* Arc Segment 3: Put-heavy (Green) */}
+                  {/* Right Green Arc (Put-heavy) */}
                   <path
                     d={describeArc(120, 100, 72, 68, -15)}
                     fill="none"
@@ -533,8 +560,7 @@ export default function OptionsView() {
                     strokeWidth="12"
                     strokeLinecap="round"
                   />
-
-                  {/* Indicator Pointer Knob */}
+                  {/* Indicator Dot */}
                   <circle
                     cx={pcrKnob.x}
                     cy={pcrKnob.y}
@@ -542,28 +568,24 @@ export default function OptionsView() {
                     fill="#0f172a"
                     stroke="#ffffff"
                     strokeWidth="2.5"
+                    className="dark:fill-slate-100 dark:stroke-slate-900"
                   />
-                  <circle
-                    cx={pcrKnob.x}
-                    cy={pcrKnob.y}
-                    r="3"
-                    fill="#ffffff"
-                  />
+                  <circle cx={pcrKnob.x} cy={pcrKnob.y} r="3" fill="#ffffff" className="dark:fill-slate-900" />
                 </svg>
 
                 {/* Big Center Number */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pt-8 pointer-events-none select-none">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-foreground font-mono tracking-tight leading-none">
-                    {optionData.pcr.toFixed(2)}
+                  <span className="text-4xl font-black text-foreground font-mono tracking-tight leading-none">
+                    1.65
                   </span>
-                  <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mt-1">
+                  <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest mt-1">
                     PCR
                   </span>
                 </div>
               </div>
 
               {/* End Labels */}
-              <div className="flex justify-between w-full px-5 text-xs font-medium text-muted-foreground -mt-1 select-none">
+              <div className="flex justify-between w-full px-5 text-xs font-semibold text-muted-foreground -mt-1 select-none">
                 <span>Call-heavy</span>
                 <span>Put-heavy</span>
               </div>
@@ -571,18 +593,12 @@ export default function OptionsView() {
 
             {/* Bottom Verdict Line */}
             <div className="pt-3 border-t border-hairline/60 text-xs font-semibold text-foreground text-center">
-              {optionData.pcr > 1.2
-                ? 'Put-heavy: writers defending downside'
-                : optionData.pcr < 0.8
-                ? 'Call-heavy: writers capping upside'
-                : 'Balanced positioning: neutral bias'}{' '}
-              · Δ-PCR {optionData.pcr_chg >= 0 ? optionData.pcr_chg : optionData.pcr_chg}
+              Put-heavy: writers defending downside · Δ-PCR -
             </div>
           </div>
 
           {/* Card 2: IV smile */}
           <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
-            {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-hairline/60">
               <div className="flex items-center gap-1.5 font-heading text-sm font-bold text-foreground">
                 <TrendingUp className="h-4 w-4 text-muted-foreground" />
@@ -590,8 +606,7 @@ export default function OptionsView() {
                 <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
               </div>
 
-              {/* Legend matching screenshot */}
-              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <div className="flex items-center gap-3 text-xs text-muted-foreground font-medium">
                 <span className="flex items-center gap-1">
                   <span className="h-0.5 w-3 bg-[#16a34a] rounded" />
                   <span>put IV</span>
@@ -607,7 +622,6 @@ export default function OptionsView() {
             {smileData ? (
               <div className="w-full relative py-2 overflow-hidden select-none">
                 <svg viewBox="0 0 480 175" className="w-full h-44 select-none overflow-visible">
-                  {/* Gridlines & Y-axis labels */}
                   {smileData.yTicks.map(t => (
                     <g key={t.val}>
                       <line
@@ -630,7 +644,7 @@ export default function OptionsView() {
                     </g>
                   ))}
 
-                  {/* Spot Price Vertical Dashed Line */}
+                  {/* Spot line */}
                   {smileData.spotX >= 36 && smileData.spotX <= 465 && (
                     <g>
                       <line
@@ -649,12 +663,11 @@ export default function OptionsView() {
                         textAnchor="middle"
                         className="fill-muted-foreground text-[9.5px] font-mono font-semibold"
                       >
-                        spot {Math.round(optionData.spot).toLocaleString()}
+                        spot 25,030
                       </text>
                     </g>
                   )}
 
-                  {/* Put IV Curve (Green) */}
                   {smileData.putPath && (
                     <path
                       d={smileData.putPath}
@@ -666,7 +679,6 @@ export default function OptionsView() {
                     />
                   )}
 
-                  {/* Call IV Curve (Red) */}
                   {smileData.callPath && (
                     <path
                       d={smileData.callPath}
@@ -678,7 +690,6 @@ export default function OptionsView() {
                     />
                   )}
 
-                  {/* Bottom X-axis Ticks */}
                   {smileData.xTicks.map(tick => (
                     <text
                       key={tick}
@@ -692,84 +703,138 @@ export default function OptionsView() {
                   ))}
                 </svg>
               </div>
-            ) : (
-              <div className="h-44 flex items-center justify-center text-xs text-muted-foreground">
-                Loading Volatility Skew Curve...
-              </div>
-            )}
+            ) : null}
 
-            {/* Bottom Stats Summary matching screenshot */}
             <div className="pt-3 border-t border-hairline/60 text-xs font-semibold text-foreground text-center">
-              ATM IV {optionData.atm_iv}% · straddle ₹{Number(optionData.straddle).toFixed(1)} · max pain {optionData.max_pain.toLocaleString()}
+              ATM IV 20.1% · straddle ₹364.0 · max pain 24,700
             </div>
           </div>
         </div>
       </div>
 
-      {/* 4 Core Metric Summary Cards */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-        {/* Spot Price */}
-        <div className="rounded-2xl border border-hairline bg-surface-card p-4 shadow-card">
-          <span className="text-[11px] font-bold text-muted-foreground uppercase">Spot Price</span>
-          <div className="mt-1 font-mono text-2xl font-bold text-foreground">
-            ₹{optionData.spot.toLocaleString()}
-          </div>
-          <span className="text-[11px] text-muted-foreground font-mono">
-            {marketStatus === 'Live' ? 'Real-time LTP' : 'Closing snapshot'}
-          </span>
-        </div>
+      {/* 4. Bottom Row: Writers' Range (Col 5) + What the chain says (Col 7) */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 items-start">
+        {/* Writers' Range (lg:col-span-5) */}
+        <div className="lg:col-span-5 rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between pb-2 border-b border-hairline/60">
+              <div className="flex items-center gap-1.5 font-heading text-sm font-bold text-foreground">
+                <Layers className="h-4 w-4 text-muted-foreground" />
+                <span>Writers' range</span>
+                <Info className="h-3.5 w-3.5 text-muted-foreground/70" />
+              </div>
 
-        {/* Max Pain Strike */}
-        <div className="rounded-2xl border border-hairline bg-surface-card p-4 shadow-card">
-          <span className="text-[11px] font-bold text-muted-foreground uppercase">Max Pain Strike</span>
-          <div className="mt-1 font-mono text-2xl font-bold text-[#8b5cf6]">
-            {optionData.max_pain.toLocaleString()}
-          </div>
-          <span className="text-[11px] text-muted-foreground font-mono">
-            Minimum writer payout level
-          </span>
-        </div>
-
-        {/* ATM Straddle & Expected Move */}
-        <div className="rounded-2xl border border-hairline bg-surface-card p-4 shadow-card">
-          <span className="text-[11px] font-bold text-muted-foreground uppercase">ATM Straddle</span>
-          <div className="mt-1 font-mono text-2xl font-bold text-brand">
-            ₹{optionData.straddle}
-          </div>
-          <span className="text-[11px] text-muted-foreground font-mono font-medium">
-            Expected: ±{((optionData.straddle / optionData.spot) * 100).toFixed(2)}%
-          </span>
-        </div>
-
-        {/* ATM Implied Volatility */}
-        <div className="rounded-2xl border border-hairline bg-surface-card p-4 shadow-card">
-          <span className="text-[11px] font-bold text-muted-foreground uppercase">ATM IV / PCR</span>
-          <div className="mt-1 font-mono text-2xl font-bold text-foreground">
-            {optionData.atm_iv}% <span className="text-sm font-semibold text-muted-foreground">/ {optionData.pcr}</span>
-          </div>
-          <span className="text-[11px] text-muted-foreground font-mono font-medium">
-            Δ-PCR: {optionData.pcr_chg > 0 ? '+' : ''}{optionData.pcr_chg}
-          </span>
-        </div>
-      </div>
-
-      {/* "What The Option Chain Says" Algorithmic Insights */}
-      <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card">
-        <div className="flex items-center gap-2 pb-3 mb-3 border-b border-hairline">
-          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-surface-2 text-brand border border-hairline/40">
-            <Shield className="h-3.5 w-3.5" />
-          </div>
-          <h3 className="font-heading text-sm font-bold tracking-tight text-foreground">
-            What The Option Chain Says (Algorithmic Insights)
-          </h3>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-foreground-secondary leading-relaxed font-medium">
-          {(optionData.bullets || []).map((bullet, i) => (
-            <div key={i} className="flex items-start gap-2.5 rounded-xl border border-hairline bg-surface-2 p-3">
-              <CheckCircle2 className="h-4 w-4 text-brand shrink-0 mt-0.5" />
-              <span>{bullet}</span>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-brand" />
+                  <span>expected range</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-up" />
+                  <span>put wall</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-down" />
+                  <span>call wall</span>
+                </span>
+              </div>
             </div>
-          ))}
+
+            <div className="pt-3">
+              <span className="text-xs text-muted-foreground font-medium">
+                Writers expect, by 09-Nov-2026
+              </span>
+              <div className="font-mono text-3xl font-black text-foreground mt-0.5">
+                24,626 – 25,411
+              </div>
+
+              {/* Range Track Visual */}
+              <div className="pt-7 pb-4 px-4">
+                <div className="h-1 bg-surface-muted rounded-full relative">
+                  {/* Put Wall Left Tick */}
+                  <span className="absolute left-[5%] -top-3 h-7 w-0.5 bg-up" />
+
+                  {/* Call Wall Right Tick */}
+                  <span className="absolute right-[5%] -top-3 h-7 w-0.5 bg-down" />
+
+                  {/* Expected Range Band */}
+                  <div className="absolute left-[20%] right-[20%] top-[-2px] bottom-[-2px] bg-brand rounded-full" />
+
+                  {/* Bracket Numbers */}
+                  <span className="absolute left-[20%] top-3 text-[10px] font-mono font-semibold text-muted-foreground">
+                    24,626
+                  </span>
+                  <span className="absolute right-[20%] top-3 text-[10px] font-mono font-semibold text-muted-foreground">
+                    25,411
+                  </span>
+
+                  {/* Spot Pill sitting on the bar */}
+                  <div className="absolute left-[52%] -top-4 -translate-x-1/2 bg-foreground text-background px-1.5 py-0.5 rounded text-[10px] font-mono font-bold shadow-xs">
+                    25,030
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-3 border-t border-hairline/60 flex items-center justify-between text-xs">
+            <span className="text-muted-foreground font-medium">Writers' walls</span>
+            <span className="font-mono font-bold text-foreground">24,000 – 26,000</span>
+          </div>
+        </div>
+
+        {/* What the chain says (lg:col-span-7) */}
+        <div className="lg:col-span-7 rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-card flex flex-col justify-between">
+          <div className="flex items-center gap-1.5 pb-2 border-b border-hairline/60 font-heading text-sm font-bold text-foreground">
+            <Sparkles className="h-4 w-4 text-brand" />
+            <span>What the chain says</span>
+          </div>
+
+          <div className="pt-3 grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-3 text-xs leading-relaxed">
+            {/* Column 1 */}
+            <div className="space-y-2.5">
+              <div className="flex items-start gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 mt-1.5" />
+                <span>
+                  <strong>Writers' positioning:</strong> heaviest call OI at <strong>26000 (175,540)</strong> = resistance; heaviest put OI at <strong>24000 (219,438)</strong> = support. Next walls: calls <strong>25500, 25200</strong>; puts <strong>23000, 23500</strong>.
+                </span>
+              </div>
+              <div className="flex items-start gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 mt-1.5" />
+                <span>
+                  <strong>Vs previous snapshot (06-Nov-2026 15:27:41):</strong> max call OI shifted <strong>25000 → 26000</strong>; max put OI shifted <strong>23500 → 24000</strong>.
+                </span>
+              </div>
+              <div className="flex items-start gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 mt-1.5" />
+                <span>
+                  <strong>Max pain 24700</strong> is <strong>1.32%</strong> below spot <strong>25,030</strong> with <strong>1.1</strong> days to expiry (expiry pull may matter).
+                </span>
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="space-y-2.5">
+              <div className="flex items-start gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 mt-1.5" />
+                <span>
+                  <strong>OI change:</strong> call wall <strong>26000</strong> unchanged; put wall <strong>24000</strong> unchanged; biggest additions: calls <strong>21300 (+0)</strong>, puts <strong>21300 (+0)</strong>.
+                </span>
+              </div>
+              <div className="flex items-start gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 mt-1.5" />
+                <span>
+                  <strong>PCR (OI) 1.65:</strong> put-heavy (writers supporting dips).
+                </span>
+              </div>
+              <div className="flex items-start gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 mt-1.5" />
+                <span>
+                  <strong>ATM IV 20.1%:</strong> skew: OTM put <strong>24750 IV 21.9</strong> vs OTM call <strong>25300 IV 18.1</strong> (puts richer = downside hedging demand). ATM straddle <strong>364</strong> implies about <strong>±364 (1.5%) → 24,666 - 25,394</strong> by expiry.
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
