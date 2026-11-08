@@ -43,7 +43,7 @@ export default function PulseView() {
 
   return (
     <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-200">
-      {/* Tredye Pulse Subview Navigation (?view=flow / ?view=orderflow) */}
+      {/* Tredye Pulse Subview Navigation */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-hairline bg-surface-card p-2 sm:p-2.5 shadow-card">
         <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-2 border border-hairline/80 overflow-x-auto no-scrollbar">
           <button
@@ -55,7 +55,7 @@ export default function PulseView() {
             }`}
           >
             <Activity className="h-3.5 w-3.5" />
-            <span>Market Pulse</span>
+            <span>Overview</span>
           </button>
 
           <button
@@ -68,9 +68,6 @@ export default function PulseView() {
           >
             <TrendingUp className="h-3.5 w-3.5" />
             <span>Capital Flow</span>
-            <span className="rounded-md bg-brand/12 px-1.5 py-0.2 text-[10px] font-bold text-brand font-mono">
-              ?view=flow
-            </span>
           </button>
 
           <button
@@ -83,9 +80,6 @@ export default function PulseView() {
           >
             <Layers className="h-3.5 w-3.5" />
             <span>Orderflow &amp; Depth</span>
-            <span className="rounded-md bg-up/12 px-1.5 py-0.2 text-[10px] font-bold text-up font-mono">
-              ?view=orderflow
-            </span>
           </button>
         </div>
 

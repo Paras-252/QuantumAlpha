@@ -45,9 +45,9 @@ export default function CommandPalette() {
 
   // Screens matching Tredye
   const screens = [
-    { id: 'pulse', label: 'Market Pulse (Overview)', icon: Activity, cat: 'Screens', action: () => { changePulseView('overview'); setCurrentScreen('pulse'); } },
-    { id: 'pulse-flow', label: 'Capital Flow (Sector & Equities Flow · ?view=flow)', icon: TrendingUp, cat: 'Screens', action: () => changePulseView('flow') },
-    { id: 'pulse-orderflow', label: 'Orderflow & Market Depth (POC/VAH/VAL · ?view=orderflow)', icon: Layers, cat: 'Screens', action: () => changePulseView('orderflow') },
+    { id: 'pulse', label: 'Pulse · Overview', icon: Activity, cat: 'Screens', action: () => { changePulseView('overview'); setCurrentScreen('pulse'); } },
+    { id: 'pulse-flow', label: 'Pulse · Capital Flow', icon: TrendingUp, cat: 'Screens', action: () => changePulseView('flow') },
+    { id: 'pulse-orderflow', label: 'Pulse · Orderflow & Depth', icon: Layers, cat: 'Screens', action: () => changePulseView('orderflow') },
     { id: 'options', label: 'Option Pulse (Chain & Greeks)', icon: SlidersHorizontal, cat: 'Screens', action: () => setCurrentScreen('options') },
     { id: 'oi-flow', label: 'OI Flow (Long/Short Buildups)', icon: Layers, cat: 'Screens', action: () => setCurrentScreen('oi-flow') },
     { id: 'liquidity', label: 'Liquidity Map (Order Flow)', icon: Droplets, cat: 'Screens', action: () => setCurrentScreen('liquidity') },
