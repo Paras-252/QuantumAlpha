@@ -2,10 +2,14 @@
 // Run this on your GoDaddy cPanel Node.js App or VPS.
 // Because this runs on GoDaddy, all requests to Zerodha originate from GoDaddy's permanent Static IP!
 
-const express = require('express');
-const http = require('http');
-const path = require('path');
-const WebSocket = require('ws');
+import express from 'express';
+import http from 'http';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import WebSocket, { WebSocketServer } from 'ws';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
@@ -29,7 +33,7 @@ app.get('/api/health', (req, res) => {
 // 3. WebSocket Relay for Zerodha KiteTicker
 // When your laptop or mobile browser connects to /ws/kite, this GoDaddy server connects
 // to Zerodha's wss://ws.kite.trade. Zerodha sees GoDaddy's whitelisted Static IP!
-const wss = new WebSocket.Server({ noServer: true });
+const wss = new WebSocketServer({ noServer: true });
 
 wss.on('connection', (clientWs, req) => {
   const urlObj = new URL(req.url, `http://${req.headers.host}`);
@@ -113,8 +117,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-server.listen(PORT, () => {
-  console.log(`Tredye Pro Terminal running on port ${PORT}`);
+// Listen on process.env.PORT (defaults to 3000)
+server.listen(process.env.PORT || 3000, () => {
+  console.log(`Tredye Pro Terminal running on port ${process.env.PORT || 3000}`);
   console.log(`GoDaddy Static IP Relay available at /ws/kite`);
 });
-
