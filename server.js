@@ -27,7 +27,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
-    message: 'Tredye Terminal & GoDaddy Relay Active'
+    message: 'Quantum Alpha Terminal & GoDaddy Relay Active'
   });
 });
 
@@ -120,7 +120,7 @@ wss.on('connection', (clientWs, req) => {
   try {
     kiteWs = new WebSocket(targetUrl, {
       headers: {
-        'User-Agent': 'Tredye-GoDaddy-Relay/1.0'
+        'User-Agent': 'QuantumAlpha-GoDaddy-Relay/1.0'
       }
     });
 
@@ -186,6 +186,6 @@ app.get('*', (req, res) => {
 
 // Listen on process.env.PORT (defaults to 3000)
 server.listen(process.env.PORT || 3000, () => {
-  console.log(`Tredye Pro Terminal running on port ${process.env.PORT || 3000}`);
+  console.log(`Quantum Alpha Pro Terminal running on port ${process.env.PORT || 3000}`);
   console.log(`GoDaddy Static IP Relay available at /ws/kite`);
 });

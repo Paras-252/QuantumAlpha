@@ -76,17 +76,17 @@ export default function Header() {
           <button
             onClick={() => setCurrentScreen('pulse')}
             className="group flex items-center gap-2.5 outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-lg"
-            title="Tredye - See the market move"
+            title="Quantum Alpha - See the market move"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-deep to-brand text-white shadow-glow">
-              {/* Tredye Stylized Diamond Logo */}
+              {/* Quantum Alpha Stylized Diamond Logo */}
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5">
                 <path d="M12 2L2 9.5L12 17L22 9.5L12 2Z" opacity="0.9" />
                 <path d="M12 17L4.5 11.5L2 13.5L12 21L22 13.5L19.5 11.5L12 17Z" />
               </svg>
             </div>
             <span className="font-heading text-lg font-bold tracking-tight text-foreground max-sm:hidden">
-              Tredye
+              Quantum Alpha
             </span>
             <span className="rounded-md bg-brand/12 px-1.5 py-0.5 text-[10px] font-bold text-brand tracking-wider uppercase max-md:hidden">
               PRO

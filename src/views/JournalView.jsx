@@ -179,7 +179,7 @@ export default function JournalView() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `tredye-journal-${todayStr}.csv`;
+    a.download = `quantum-alpha-journal-${todayStr}.csv`;
     a.click();
   };
 

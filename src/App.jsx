@@ -64,11 +64,11 @@ function MainContent() {
         {renderScreen()}
       </main>
 
-      {/* Footer matching Tredye */}
+      {/* Footer */}
       <footer className="w-full border-t border-hairline py-6 px-4 sm:px-6 text-xs text-muted-foreground mt-8 bg-surface-2/40">
         <div className="max-w-[1800px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-heading font-bold text-foreground">Tredye Pro</span>
+            <span className="font-heading font-bold text-foreground">Quantum Alpha Pro</span>
             <span>·</span>
             <span>Live NSE F&amp;O Market Pulse &amp; Options Intelligence</span>
           </div>
@@ -81,7 +81,7 @@ function MainContent() {
           </div>
 
           <div className="text-[11px] text-subtle-foreground">
-            © {new Date().getFullYear()} Tredye. For educational &amp; analytical purposes only. Not SEBI registered investment advice.
+            © {new Date().getFullYear()} Quantum Alpha. For educational &amp; analytical purposes only. Not SEBI registered investment advice.
           </div>
         </div>
       </footer>

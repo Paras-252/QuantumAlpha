@@ -88,7 +88,7 @@ export default function AuthModal() {
             </svg>
           </div>
           <h2 className="font-heading text-xl font-bold tracking-tight">
-            {mode === 'login' ? 'Sign in to Tredye' : 'Create Free Tredye Account'}
+            {mode === 'login' ? 'Sign in to Quantum Alpha' : 'Create Free Quantum Alpha Account'}
           </h2>
           <p className="mt-1 text-xs text-muted-foreground">
             {mode === 'login'
@@ -149,7 +149,7 @@ export default function AuthModal() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="trader@tredye.com"
+                placeholder="trader@quantumalpha.com"
                 className="w-full rounded-xl border border-hairline bg-surface-2 py-2.5 pr-3 pl-9 text-foreground placeholder:text-muted-foreground outline-none focus:border-brand focus:ring-1 focus:ring-brand"
               />
             </div>
@@ -194,7 +194,7 @@ export default function AuthModal() {
         <div className="mt-5 text-center text-xs text-muted-foreground">
           {mode === 'login' ? (
             <p>
-              New to Tredye?{' '}
+              New to Quantum Alpha?{' '}
               <button
                 type="button"
                 onClick={() => { setMode('register'); setError(''); }}

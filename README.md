@@ -1,6 +1,6 @@
-# Tredye Terminal Clone 🚀
+# Quantum Alpha Pro Terminal 🚀
 
-A high-performance visual intelligence and analytics dashboard for Indian NSE F&O markets, trading journal, and derivatives tools matching **[tredye.com](https://tredye.com/)**.
+A high-performance visual intelligence and analytics dashboard for Indian NSE F&O markets, Zerodha Kite WebSocket live tick streaming, trading journal, and derivatives tools.
 
 ---
 

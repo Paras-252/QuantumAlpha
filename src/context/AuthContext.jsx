@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
     return {
       id: "usr_94821",
       name: "Paras (Pro Trader)",
-      email: "trader@tredye.com",
+      email: "trader@quantumalpha.com",
       plan: "Pro Terminal",
       avatar: "PT",
       role: "authenticated",
@@ -85,7 +85,7 @@ export function AuthProvider({ children }) {
   };
 
   const loginDemo = () => {
-    login("demo.trader@tredye.com", "password123");
+    login("demo.trader@quantumalpha.com", "password123");
   };
 
   return (
