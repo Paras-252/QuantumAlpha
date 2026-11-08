@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light Theme Variables matching Tredye - High Contrast & Crisp Visibility */
+:root, html.light {
+  --background: #f4f4f7;
+  --bg: #f4f4f7;
+  --foreground: #09090d;
+  --foreground-secondary: #272630;
+  --muted-foreground: #4e4d5a;
+  --subtle-foreground: #5e5d6c;
+  --surface: #ffffff;
+  --surface-2: #f8f8fb;
+  --surface-3: #eeeef4;
+  --surface-raised: #ffffff;
+  --surface-card: #ffffff;
+  --surface-muted: #e7e7ee;
+  --surface-muted-2: #dadade;
+  --hairline: rgba(15, 15, 35, 0.12);
+  --hairline-strong: rgba(15, 15, 35, 0.22);
+  --border: rgba(15, 15, 35, 0.14);
+  --brand: #512feb;
+  --brand-deep: #3b1fb5;
+  --brand-glow: rgba(81, 47, 235, 0.20);
+  --up: #15803d;
+  --up-rgb: 21 128 61;
+  --down: #dc2626;
+  --down-rgb: 220 38 38;
+  --flat: #4e4d5a;
+  --warn: #b45309;
+  --shadow-card: 0 0 0 1px rgba(15, 15, 35, 0.08), 0 1px 3px rgba(20, 16, 60, 0.06), 0 10px 28px -18px rgba(20, 16, 60, 0.12);
+  --shadow-control: 0 0 0 1px rgba(15, 15, 35, 0.12), 0 1px 2px rgba(20, 16, 60, 0.06);
+}
+
+/* Dark Theme Variables matching Tredye */
+html.dark {
+  --background: #030303;
+  --bg: #030303;
+  --foreground: #f4f3f8;
+  --foreground-secondary: #b4b3c0;
+  --muted-foreground: #8f8e9b;
+  --subtle-foreground: #6b6a78;
+  --surface: #0d0d10;
+  --surface-2: #121216;
+  --surface-3: #18181e;
+  --surface-raised: #141418;
+  --surface-card: #0d0d10;
+  --surface-muted: #1e1e25;
+  --surface-muted-2: #26262e;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.08);
+  --brand: #8b5cf6;
+  --brand-deep: #512feb;
+  --brand-glow: rgba(81, 47, 235, 0.32);
+  --up: #22c55e;
+  --up-rgb: 34 197 94;
+  --down: #ef4444;
+  --down-rgb: 239 68 68;
+  --flat: #8f8e9b;
+  --warn: #f59e0b;
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 3px rgba(0, 0, 0, 0.4), 0 10px 28px -18px rgba(0, 0, 0, 0.5);
+  --shadow-control: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--foreground);
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--subtle-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.tredye-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-card);
+  border-radius: 1rem;
+}

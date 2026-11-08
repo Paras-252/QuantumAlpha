@@ -1,0 +1,2568 @@
+{
+  "NIFTY": {
+    "symbol": "NIFTY",
+    "spot": 25030.35,
+    "chg": 493.7504,
+    "chg_pct": 2.0123,
+    "expiry": "09-Nov-2026",
+    "expiries": [
+      "09-Nov-2026",
+      "17-Nov-2026",
+      "23-Nov-2026",
+      "01-Dec-2026",
+      "08-Dec-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 24450,
+        "coi": 7716,
+        "poi": 47359,
+        "cchg": -17931,
+        "pchg": 13378,
+        "civ": 0,
+        "piv": 22.69
+      },
+      {
+        "k": 24500,
+        "coi": 35952,
+        "poi": 138761,
+        "cchg": -53283,
+        "pchg": 49225,
+        "civ": 0,
+        "piv": 22.35
+      },
+      {
+        "k": 24550,
+        "coi": 12592,
+        "poi": 49551,
+        "cchg": -53471,
+        "pchg": 3408,
+        "civ": 0,
+        "piv": 22.12
+      },
+      {
+        "k": 24600,
+        "coi": 40227,
+        "poi": 99172,
+        "cchg": -56091,
+        "pchg": 68826,
+        "civ": 0,
+        "piv": 21.99
+      },
+      {
+        "k": 24650,
+        "coi": 18413,
+        "poi": 44361,
+        "cchg": -21281,
+        "pchg": 36104,
+        "civ": 0,
+        "piv": 22.08
+      },
+      {
+        "k": 24700,
+        "coi": 44778,
+        "poi": 94818,
+        "cchg": -50806,
+        "pchg": 85214,
+        "civ": 0,
+        "piv": 21.97
+      },
+      {
+        "k": 24750,
+        "coi": 22839,
+        "poi": 59992,
+        "cchg": -15878,
+        "pchg": 54929,
+        "civ": 9.54,
+        "piv": 21.89
+      },
+      {
+        "k": 24800,
+        "coi": 57398,
+        "poi": 78150,
+        "cchg": -61615,
+        "pchg": 73415,
+        "civ": 11.04,
+        "piv": 22.25
+      },
+      {
+        "k": 24850,
+        "coi": 22107,
+        "poi": 32989,
+        "cchg": -12204,
+        "pchg": 31854,
+        "civ": 12.66,
+        "piv": 22.58
+      },
+      {
+        "k": 24900,
+        "coi": 60582,
+        "poi": 52140,
+        "cchg": 3312,
+        "pchg": 50625,
+        "civ": 13.65,
+        "piv": 22.81
+      },
+      {
+        "k": 24950,
+        "coi": 29195,
+        "poi": 25964,
+        "cchg": 6613,
+        "pchg": 25418,
+        "civ": 14.65,
+        "piv": 23.22
+      },
+      {
+        "k": 25000,
+        "coi": 170238,
+        "poi": 75051,
+        "cchg": -13768,
+        "pchg": 63118,
+        "civ": 15.07,
+        "piv": 23.76
+      },
+      {
+        "k": 25050,
+        "coi": 34085,
+        "poi": 9697,
+        "cchg": 9956,
+        "pchg": 9476,
+        "civ": 16,
+        "piv": 24.2
+      },
+      {
+        "k": 25100,
+        "coi": 70286,
+        "poi": 15850,
+        "cchg": 10240,
+        "pchg": 15302,
+        "civ": 16.38,
+        "piv": 24.79
+      },
+      {
+        "k": 25150,
+        "coi": 31296,
+        "poi": 2172,
+        "cchg": 12323,
+        "pchg": 2094,
+        "civ": 16.7,
+        "piv": 25.26
+      },
+      {
+        "k": 25200,
+        "coi": 89655,
+        "poi": 5020,
+        "cchg": 3302,
+        "pchg": 4199,
+        "civ": 17.06,
+        "piv": 25.88
+      },
+      {
+        "k": 25250,
+        "coi": 35769,
+        "poi": 1012,
+        "cchg": 16630,
+        "pchg": 1012,
+        "civ": 17.54,
+        "piv": 26.96
+      },
+      {
+        "k": 25300,
+        "coi": 83795,
+        "poi": 2381,
+        "cchg": 17321,
+        "pchg": 1648,
+        "civ": 18.08,
+        "piv": 27.94
+      },
+      {
+        "k": 25350,
+        "coi": 27119,
+        "poi": 717,
+        "cchg": 6386,
+        "pchg": 717,
+        "civ": 18.59,
+        "piv": 28.27
+      },
+      {
+        "k": 25400,
+        "coi": 76003,
+        "poi": 1043,
+        "cchg": 37529,
+        "pchg": 1023,
+        "civ": 18.91,
+        "piv": 29.37
+      },
+      {
+        "k": 25450,
+        "coi": 21335,
+        "poi": 336,
+        "cchg": 5936,
+        "pchg": 336,
+        "civ": 19.26,
+        "piv": 30.31
+      },
+      {
+        "k": 25500,
+        "coi": 148100,
+        "poi": 5666,
+        "cchg": 33921,
+        "pchg": 4076,
+        "civ": 19.72,
+        "piv": 31.51
+      },
+      {
+        "k": 25550,
+        "coi": 20420,
+        "poi": 101,
+        "cchg": 6131,
+        "pchg": 101,
+        "civ": 20.16,
+        "piv": 32.57
+      },
+      {
+        "k": 25600,
+        "coi": 58048,
+        "poi": 176,
+        "cchg": 13636,
+        "pchg": 176,
+        "civ": 20.42,
+        "piv": 32.23
+      },
+      {
+        "k": 25650,
+        "coi": 22123,
+        "poi": 0,
+        "cchg": 7477,
+        "pchg": 0,
+        "civ": 20.96,
+        "piv": 0
+      }
+    ],
+    "smile": [
+      {
+        "k": 24050,
+        "civ": null,
+        "piv": 26.23
+      },
+      {
+        "k": 24100,
+        "civ": null,
+        "piv": 25.81
+      },
+      {
+        "k": 24150,
+        "civ": null,
+        "piv": 25.3
+      },
+      {
+        "k": 24200,
+        "civ": null,
+        "piv": 24.69
+      },
+      {
+        "k": 24250,
+        "civ": null,
+        "piv": 23.87
+      },
+      {
+        "k": 24300,
+        "civ": null,
+        "piv": 23.85
+      },
+      {
+        "k": 24350,
+        "civ": null,
+        "piv": 23.22
+      },
+      {
+        "k": 24400,
+        "civ": null,
+        "piv": 22.86
+      },
+      {
+        "k": 24450,
+        "civ": null,
+        "piv": 22.69
+      },
+      {
+        "k": 24500,
+        "civ": null,
+        "piv": 22.35
+      },
+      {
+        "k": 24550,
+        "civ": null,
+        "piv": 22.12
+      },
+      {
+        "k": 24600,
+        "civ": null,
+        "piv": 21.99
+      },
+      {
+        "k": 24650,
+        "civ": null,
+        "piv": 22.08
+      },
+      {
+        "k": 24700,
+        "civ": null,
+        "piv": 21.97
+      },
+      {
+        "k": 24750,
+        "civ": 9.54,
+        "piv": 21.89
+      },
+      {
+        "k": 24800,
+        "civ": 11.04,
+        "piv": 22.25
+      },
+      {
+        "k": 24850,
+        "civ": 12.66,
+        "piv": 22.58
+      },
+      {
+        "k": 24900,
+        "civ": 13.65,
+        "piv": 22.81
+      },
+      {
+        "k": 24950,
+        "civ": 14.65,
+        "piv": 23.22
+      },
+      {
+        "k": 25000,
+        "civ": 15.07,
+        "piv": 23.76
+      },
+      {
+        "k": 25050,
+        "civ": 16,
+        "piv": 24.2
+      },
+      {
+        "k": 25100,
+        "civ": 16.38,
+        "piv": 24.79
+      },
+      {
+        "k": 25150,
+        "civ": 16.7,
+        "piv": 25.26
+      },
+      {
+        "k": 25200,
+        "civ": 17.06,
+        "piv": 25.88
+      },
+      {
+        "k": 25250,
+        "civ": 17.54,
+        "piv": 26.96
+      },
+      {
+        "k": 25300,
+        "civ": 18.08,
+        "piv": 27.94
+      },
+      {
+        "k": 25350,
+        "civ": 18.59,
+        "piv": 28.27
+      },
+      {
+        "k": 25400,
+        "civ": 18.91,
+        "piv": 29.37
+      },
+      {
+        "k": 25450,
+        "civ": 19.26,
+        "piv": 30.31
+      },
+      {
+        "k": 25500,
+        "civ": 19.72,
+        "piv": 31.51
+      },
+      {
+        "k": 25550,
+        "civ": 20.16,
+        "piv": 32.57
+      },
+      {
+        "k": 25600,
+        "civ": 20.42,
+        "piv": 32.23
+      },
+      {
+        "k": 25650,
+        "civ": 20.96,
+        "piv": null
+      },
+      {
+        "k": 25700,
+        "civ": 21.31,
+        "piv": 34.73
+      },
+      {
+        "k": 25750,
+        "civ": 21.47,
+        "piv": null
+      },
+      {
+        "k": 25800,
+        "civ": 21.77,
+        "piv": 39.92
+      },
+      {
+        "k": 25850,
+        "civ": 22.25,
+        "piv": null
+      },
+      {
+        "k": 25900,
+        "civ": 22.58,
+        "piv": null
+      },
+      {
+        "k": 25950,
+        "civ": 23.02,
+        "piv": null
+      },
+      {
+        "k": 26000,
+        "civ": 23.68,
+        "piv": 41.59
+      },
+      {
+        "k": 26050,
+        "civ": 23.91,
+        "piv": null
+      }
+    ],
+    "pcr": 1.65,
+    "pcr_chg": 28.78,
+    "max_pain": 24700,
+    "atm_iv": 20.1,
+    "straddle": 364,
+    "range": [
+      24618.1133,
+      25419.4205
+    ],
+    "walls": [
+      24000,
+      26000
+    ],
+    "iv1": [
+      24727.3609,
+      25337.0517
+    ],
+    "conviction": 35,
+    "verdict": "Writers box 24,000-26,000; max call OI moved up, max put OI moved up; PCR 1.65",
+    "bias": "bullish",
+    "confidence": "low",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 26000 (175,540) = resistance; heaviest put OI at 24000 (219,438) = support. Next walls: calls 25500, 25200; puts 23000, 23500.",
+      "OI change: call wall 26000 strengthening (+68,210); put wall 24000 strengthening (+106,725); biggest additions: calls 26000 (+68,210), puts 24000 (+106,725); biggest cuts: calls 24800 (-61,615), puts 22000 (-33,306).",
+      "Vs previous snapshot (06-Nov-2026 15:27:41): max call OI shifted 25000 -> 26000; max put OI shifted 23500 -> 24000.",
+      "PCR (OI) 1.65: put-heavy (writers supporting dips); change-in-OI PCR 28.78 (more puts than calls added today).",
+      "Max pain 24700 is 1.32% below spot 25,030 with 1.3 days to expiry (expiry pull may matter).",
+      "ATM IV 20.1%; skew: OTM put 24750 IV 21.9 vs OTM call 25350 IV 18.6 (puts richer = downside hedging demand). ATM straddle 364 implies about ±364 (1.5%) -> 24,666-25,394 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Long Buildup on 8/11 strikes (call buying); puts: Short Buildup on 11/11 strikes (put writing)."
+    ],
+    "chain_ts": "06-Nov-2026 15:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:40+05:30"
+  },
+  "BANKNIFTY": {
+    "symbol": "BANKNIFTY",
+    "spot": 59086,
+    "chg": 1312.3516,
+    "chg_pct": 2.2715,
+    "expiry": "23-Nov-2026",
+    "expiries": [
+      "23-Nov-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 57900,
+        "coi": 2761,
+        "poi": 3123,
+        "cchg": -1571,
+        "pchg": 902,
+        "civ": 10.02,
+        "piv": 19.13
+      },
+      {
+        "k": 58000,
+        "coi": 68864,
+        "poi": 61938,
+        "cchg": -6111,
+        "pchg": 12740,
+        "civ": 10.31,
+        "piv": 19.06
+      },
+      {
+        "k": 58100,
+        "coi": 1865,
+        "poi": 2043,
+        "cchg": -452,
+        "pchg": 1413,
+        "civ": 10.77,
+        "piv": 19.19
+      },
+      {
+        "k": 58200,
+        "coi": 2557,
+        "poi": 2547,
+        "cchg": -1931,
+        "pchg": 2262,
+        "civ": 11.28,
+        "piv": 19.16
+      },
+      {
+        "k": 58300,
+        "coi": 3023,
+        "poi": 2536,
+        "cchg": -73,
+        "pchg": 2227,
+        "civ": 11.36,
+        "piv": 19.13
+      },
+      {
+        "k": 58400,
+        "coi": 2035,
+        "poi": 1379,
+        "cchg": 772,
+        "pchg": 1203,
+        "civ": 11.25,
+        "piv": 19.22
+      },
+      {
+        "k": 58500,
+        "coi": 13827,
+        "poi": 10404,
+        "cchg": -530,
+        "pchg": 7714,
+        "civ": 11.95,
+        "piv": 18.93
+      },
+      {
+        "k": 58600,
+        "coi": 2466,
+        "poi": 2567,
+        "cchg": 5,
+        "pchg": 2531,
+        "civ": 12.26,
+        "piv": 19.19
+      },
+      {
+        "k": 58700,
+        "coi": 6962,
+        "poi": 6061,
+        "cchg": 5401,
+        "pchg": 6034,
+        "civ": 12.11,
+        "piv": 19.08
+      },
+      {
+        "k": 58800,
+        "coi": 3087,
+        "poi": 2120,
+        "cchg": -8,
+        "pchg": 2104,
+        "civ": 12.58,
+        "piv": 19.23
+      },
+      {
+        "k": 58900,
+        "coi": 2727,
+        "poi": 1526,
+        "cchg": 1801,
+        "pchg": 1524,
+        "civ": 12.9,
+        "piv": 19.34
+      },
+      {
+        "k": 59000,
+        "coi": 21705,
+        "poi": 13318,
+        "cchg": -1989,
+        "pchg": 7257,
+        "civ": 12.75,
+        "piv": 19.37
+      },
+      {
+        "k": 59100,
+        "coi": 1403,
+        "poi": 449,
+        "cchg": 616,
+        "pchg": 432,
+        "civ": 12.78,
+        "piv": 19.56
+      },
+      {
+        "k": 59200,
+        "coi": 2611,
+        "poi": 404,
+        "cchg": 422,
+        "pchg": 403,
+        "civ": 13.02,
+        "piv": 19.71
+      },
+      {
+        "k": 59300,
+        "coi": 1463,
+        "poi": 291,
+        "cchg": 186,
+        "pchg": 278,
+        "civ": 13.11,
+        "piv": 19.43
+      },
+      {
+        "k": 59400,
+        "coi": 1227,
+        "poi": 125,
+        "cchg": 451,
+        "pchg": 124,
+        "civ": 13.21,
+        "piv": 19.62
+      },
+      {
+        "k": 59500,
+        "coi": 10732,
+        "poi": 1113,
+        "cchg": -361,
+        "pchg": 821,
+        "civ": 13.35,
+        "piv": 19.73
+      },
+      {
+        "k": 59600,
+        "coi": 1079,
+        "poi": 43,
+        "cchg": 517,
+        "pchg": 41,
+        "civ": 13.52,
+        "piv": 19.87
+      },
+      {
+        "k": 59700,
+        "coi": 1905,
+        "poi": 402,
+        "cchg": 471,
+        "pchg": 398,
+        "civ": 13.58,
+        "piv": 20.08
+      },
+      {
+        "k": 59800,
+        "coi": 1608,
+        "poi": 21,
+        "cchg": -244,
+        "pchg": 17,
+        "civ": 13.72,
+        "piv": 19.91
+      },
+      {
+        "k": 59900,
+        "coi": 1308,
+        "poi": 16,
+        "cchg": 326,
+        "pchg": 14,
+        "civ": 13.68,
+        "piv": 20.08
+      },
+      {
+        "k": 60000,
+        "coi": 24244,
+        "poi": 6924,
+        "cchg": 2972,
+        "pchg": 667,
+        "civ": 13.9,
+        "piv": 20.67
+      },
+      {
+        "k": 60100,
+        "coi": 2730,
+        "poi": 1,
+        "cchg": 1874,
+        "pchg": 0,
+        "civ": 13.95,
+        "piv": 0
+      },
+      {
+        "k": 60200,
+        "coi": 1553,
+        "poi": 3,
+        "cchg": 819,
+        "pchg": 1,
+        "civ": 13.44,
+        "piv": 21.47
+      },
+      {
+        "k": 60300,
+        "coi": 759,
+        "poi": 0,
+        "cchg": 272,
+        "pchg": 0,
+        "civ": 14.29,
+        "piv": 0
+      }
+    ],
+    "smile": [
+      {
+        "k": 57100,
+        "civ": null,
+        "piv": 19.83
+      },
+      {
+        "k": 57200,
+        "civ": null,
+        "piv": 19.79
+      },
+      {
+        "k": 57300,
+        "civ": null,
+        "piv": 19.75
+      },
+      {
+        "k": 57400,
+        "civ": null,
+        "piv": 19.69
+      },
+      {
+        "k": 57500,
+        "civ": 6.5,
+        "piv": 19.46
+      },
+      {
+        "k": 57600,
+        "civ": 11.52,
+        "piv": 19.44
+      },
+      {
+        "k": 57700,
+        "civ": 8.91,
+        "piv": 19.36
+      },
+      {
+        "k": 57800,
+        "civ": 12.2,
+        "piv": 19.31
+      },
+      {
+        "k": 57900,
+        "civ": 10.02,
+        "piv": 19.13
+      },
+      {
+        "k": 58000,
+        "civ": 10.31,
+        "piv": 19.06
+      },
+      {
+        "k": 58100,
+        "civ": 10.77,
+        "piv": 19.19
+      },
+      {
+        "k": 58200,
+        "civ": 11.28,
+        "piv": 19.16
+      },
+      {
+        "k": 58300,
+        "civ": 11.36,
+        "piv": 19.13
+      },
+      {
+        "k": 58400,
+        "civ": 11.25,
+        "piv": 19.22
+      },
+      {
+        "k": 58500,
+        "civ": 11.95,
+        "piv": 18.93
+      },
+      {
+        "k": 58600,
+        "civ": 12.26,
+        "piv": 19.19
+      },
+      {
+        "k": 58700,
+        "civ": 12.11,
+        "piv": 19.08
+      },
+      {
+        "k": 58800,
+        "civ": 12.58,
+        "piv": 19.23
+      },
+      {
+        "k": 58900,
+        "civ": 12.9,
+        "piv": 19.34
+      },
+      {
+        "k": 59000,
+        "civ": 12.75,
+        "piv": 19.37
+      },
+      {
+        "k": 59100,
+        "civ": 12.78,
+        "piv": 19.56
+      },
+      {
+        "k": 59200,
+        "civ": 13.02,
+        "piv": 19.71
+      },
+      {
+        "k": 59300,
+        "civ": 13.11,
+        "piv": 19.43
+      },
+      {
+        "k": 59400,
+        "civ": 13.21,
+        "piv": 19.62
+      },
+      {
+        "k": 59500,
+        "civ": 13.35,
+        "piv": 19.73
+      },
+      {
+        "k": 59600,
+        "civ": 13.52,
+        "piv": 19.87
+      },
+      {
+        "k": 59700,
+        "civ": 13.58,
+        "piv": 20.08
+      },
+      {
+        "k": 59800,
+        "civ": 13.72,
+        "piv": 19.91
+      },
+      {
+        "k": 59900,
+        "civ": 13.68,
+        "piv": 20.08
+      },
+      {
+        "k": 60000,
+        "civ": 13.9,
+        "piv": 20.67
+      },
+      {
+        "k": 60100,
+        "civ": 13.95,
+        "piv": null
+      },
+      {
+        "k": 60200,
+        "civ": 13.44,
+        "piv": 21.47
+      },
+      {
+        "k": 60300,
+        "civ": 14.29,
+        "piv": null
+      },
+      {
+        "k": 60400,
+        "civ": 14.3,
+        "piv": 32.53
+      },
+      {
+        "k": 60500,
+        "civ": 14.18,
+        "piv": 21.63
+      },
+      {
+        "k": 60600,
+        "civ": 14.52,
+        "piv": null
+      },
+      {
+        "k": 60700,
+        "civ": 14.39,
+        "piv": null
+      },
+      {
+        "k": 60800,
+        "civ": 14.62,
+        "piv": null
+      },
+      {
+        "k": 60900,
+        "civ": 14.91,
+        "piv": 19.86
+      },
+      {
+        "k": 61000,
+        "civ": 14.99,
+        "piv": 22.96
+      },
+      {
+        "k": 61100,
+        "civ": 15.02,
+        "piv": null
+      }
+    ],
+    "pcr": 1.24,
+    "pcr_chg": 25.61,
+    "max_pain": 57200,
+    "atm_iv": 16.17,
+    "straddle": 1648.05,
+    "range": [
+      57579.2171,
+      60543.4633
+    ],
+    "walls": [
+      58000,
+      60000
+    ],
+    "iv1": [
+      57159.4405,
+      61077.4942
+    ],
+    "conviction": 58,
+    "verdict": "Writers box 58,000-60,000; PCR 1.24, more puts than calls added (ΔOI PCR 25.61)",
+    "bias": "bullish",
+    "confidence": "moderate",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 60000 (24,244) = resistance; heaviest put OI at 58000 (61,938) = support. Next walls: calls 61000, 62000; puts 57000, 55000.",
+      "OI change: call wall 60000 strengthening (+2,972); put wall 58000 strengthening (+12,740); biggest additions: calls 58700 (+5,401), puts 58000 (+12,740); biggest cuts: calls 58000 (-6,111), puts 56000 (-3,452).",
+      "Vs previous snapshot (06-Nov-2026 15:26:38): max call OI unchanged at 60000; max put OI unchanged at 58000.",
+      "PCR (OI) 1.24: put-heavy (writers supporting dips); change-in-OI PCR 25.61 (more puts than calls added today).",
+      "Max pain 57200 is 3.19% below spot 59,086 with 15.3 days to expiry.",
+      "ATM IV 16.2%; skew: OTM put 57100 IV 19.8 vs OTM call 61000 IV 15.0 (puts richer = downside hedging demand). ATM straddle 1,648 implies about ±1,648 (2.8%) -> 57,438-60,734 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Long Buildup on 8/11 strikes (call buying); puts: Short Buildup on 11/11 strikes (put writing)."
+    ],
+    "chain_ts": "06-Nov-2026 15:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:46+05:30"
+  },
+  "RELIANCE": {
+    "symbol": "RELIANCE",
+    "spot": 1320,
+    "chg": 6.6,
+    "chg_pct": 0.5025,
+    "expiry": "23-Nov-2026",
+    "expiries": [
+      "23-Nov-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 1200,
+        "coi": 11221,
+        "poi": 17365,
+        "cchg": -649,
+        "pchg": -134,
+        "civ": 0,
+        "piv": 29.6
+      },
+      {
+        "k": 1210,
+        "coi": 3273,
+        "poi": 3654,
+        "cchg": -40,
+        "pchg": -95,
+        "civ": 23.03,
+        "piv": 28.71
+      },
+      {
+        "k": 1220,
+        "coi": 4276,
+        "poi": 6245,
+        "cchg": -266,
+        "pchg": -383,
+        "civ": 22,
+        "piv": 27.64
+      },
+      {
+        "k": 1230,
+        "coi": 5188,
+        "poi": 6131,
+        "cchg": -169,
+        "pchg": -102,
+        "civ": 11.25,
+        "piv": 26.6
+      },
+      {
+        "k": 1240,
+        "coi": 4603,
+        "poi": 6321,
+        "cchg": -254,
+        "pchg": 311,
+        "civ": 17.17,
+        "piv": 25.46
+      },
+      {
+        "k": 1250,
+        "coi": 14266,
+        "poi": 14670,
+        "cchg": -467,
+        "pchg": -133,
+        "civ": 19.66,
+        "piv": 24.71
+      },
+      {
+        "k": 1260,
+        "coi": 4497,
+        "poi": 6230,
+        "cchg": -124,
+        "pchg": -149,
+        "civ": 18.63,
+        "piv": 23.95
+      },
+      {
+        "k": 1270,
+        "coi": 5674,
+        "poi": 3478,
+        "cchg": -58,
+        "pchg": 2,
+        "civ": 20.87,
+        "piv": 23.25
+      },
+      {
+        "k": 1280,
+        "coi": 8641,
+        "poi": 4002,
+        "cchg": -616,
+        "pchg": -403,
+        "civ": 18.4,
+        "piv": 22.93
+      },
+      {
+        "k": 1290,
+        "coi": 11574,
+        "poi": 3772,
+        "cchg": -150,
+        "pchg": 84,
+        "civ": 18.57,
+        "piv": 22.67
+      },
+      {
+        "k": 1300,
+        "coi": 23205,
+        "poi": 14808,
+        "cchg": -4471,
+        "pchg": 210,
+        "civ": 18.87,
+        "piv": 22.4
+      },
+      {
+        "k": 1310,
+        "coi": 5125,
+        "poi": 2915,
+        "cchg": -381,
+        "pchg": -134,
+        "civ": 18.99,
+        "piv": 22.57
+      },
+      {
+        "k": 1320,
+        "coi": 20710,
+        "poi": 2815,
+        "cchg": -771,
+        "pchg": -27,
+        "civ": 19.36,
+        "piv": 22.41
+      },
+      {
+        "k": 1330,
+        "coi": 5216,
+        "poi": 1696,
+        "cchg": 136,
+        "pchg": -447,
+        "civ": 19.65,
+        "piv": 22.95
+      },
+      {
+        "k": 1340,
+        "coi": 5072,
+        "poi": 920,
+        "cchg": -596,
+        "pchg": 62,
+        "civ": 20.13,
+        "piv": 23.04
+      },
+      {
+        "k": 1350,
+        "coi": 17922,
+        "poi": 1039,
+        "cchg": 2173,
+        "pchg": 104,
+        "civ": 20.7,
+        "piv": 23.31
+      },
+      {
+        "k": 1360,
+        "coi": 4611,
+        "poi": 789,
+        "cchg": 408,
+        "pchg": 20,
+        "civ": 20.74,
+        "piv": 24.21
+      },
+      {
+        "k": 1370,
+        "coi": 1292,
+        "poi": 40,
+        "cchg": 35,
+        "pchg": -1,
+        "civ": 21.37,
+        "piv": 22.23
+      },
+      {
+        "k": 1380,
+        "coi": 2321,
+        "poi": 349,
+        "cchg": -113,
+        "pchg": 32,
+        "civ": 21.75,
+        "piv": 25.06
+      },
+      {
+        "k": 1390,
+        "coi": 948,
+        "poi": 2,
+        "cchg": -171,
+        "pchg": 0,
+        "civ": 22.29,
+        "piv": 25.54
+      },
+      {
+        "k": 1400,
+        "coi": 13809,
+        "poi": 3833,
+        "cchg": -621,
+        "pchg": -72,
+        "civ": 22.84,
+        "piv": 27.9
+      },
+      {
+        "k": 1410,
+        "coi": 760,
+        "poi": 2,
+        "cchg": 20,
+        "pchg": 0,
+        "civ": 23.21,
+        "piv": 33.97
+      },
+      {
+        "k": 1420,
+        "coi": 1692,
+        "poi": 7,
+        "cchg": -192,
+        "pchg": 0,
+        "civ": 23.82,
+        "piv": 31.2
+      },
+      {
+        "k": 1430,
+        "coi": 616,
+        "poi": 9,
+        "cchg": -158,
+        "pchg": 0,
+        "civ": 24.52,
+        "piv": 0
+      },
+      {
+        "k": 1440,
+        "coi": 1477,
+        "poi": 27,
+        "cchg": -67,
+        "pchg": 0,
+        "civ": 25.12,
+        "piv": 0
+      }
+    ],
+    "smile": [
+      {
+        "k": 1120,
+        "civ": null,
+        "piv": 39.69
+      },
+      {
+        "k": 1130,
+        "civ": null,
+        "piv": 38.2
+      },
+      {
+        "k": 1140,
+        "civ": 36.57,
+        "piv": 36.68
+      },
+      {
+        "k": 1150,
+        "civ": null,
+        "piv": 35.4
+      },
+      {
+        "k": 1160,
+        "civ": null,
+        "piv": 34.52
+      },
+      {
+        "k": 1170,
+        "civ": 27.43,
+        "piv": 33.5
+      },
+      {
+        "k": 1180,
+        "civ": null,
+        "piv": 31.98
+      },
+      {
+        "k": 1190,
+        "civ": null,
+        "piv": 30.77
+      },
+      {
+        "k": 1200,
+        "civ": null,
+        "piv": 29.6
+      },
+      {
+        "k": 1210,
+        "civ": 23.03,
+        "piv": 28.71
+      },
+      {
+        "k": 1220,
+        "civ": 22,
+        "piv": 27.64
+      },
+      {
+        "k": 1230,
+        "civ": 11.25,
+        "piv": 26.6
+      },
+      {
+        "k": 1240,
+        "civ": 17.17,
+        "piv": 25.46
+      },
+      {
+        "k": 1250,
+        "civ": 19.66,
+        "piv": 24.71
+      },
+      {
+        "k": 1260,
+        "civ": 18.63,
+        "piv": 23.95
+      },
+      {
+        "k": 1270,
+        "civ": 20.87,
+        "piv": 23.25
+      },
+      {
+        "k": 1280,
+        "civ": 18.4,
+        "piv": 22.93
+      },
+      {
+        "k": 1290,
+        "civ": 18.57,
+        "piv": 22.67
+      },
+      {
+        "k": 1300,
+        "civ": 18.87,
+        "piv": 22.4
+      },
+      {
+        "k": 1310,
+        "civ": 18.99,
+        "piv": 22.57
+      },
+      {
+        "k": 1320,
+        "civ": 19.36,
+        "piv": 22.41
+      },
+      {
+        "k": 1330,
+        "civ": 19.65,
+        "piv": 22.95
+      },
+      {
+        "k": 1340,
+        "civ": 20.13,
+        "piv": 23.04
+      },
+      {
+        "k": 1350,
+        "civ": 20.7,
+        "piv": 23.31
+      },
+      {
+        "k": 1360,
+        "civ": 20.74,
+        "piv": 24.21
+      },
+      {
+        "k": 1370,
+        "civ": 21.37,
+        "piv": 22.23
+      },
+      {
+        "k": 1380,
+        "civ": 21.75,
+        "piv": 25.06
+      },
+      {
+        "k": 1390,
+        "civ": 22.29,
+        "piv": 25.54
+      },
+      {
+        "k": 1400,
+        "civ": 22.84,
+        "piv": 27.9
+      },
+      {
+        "k": 1410,
+        "civ": 23.21,
+        "piv": 33.97
+      },
+      {
+        "k": 1420,
+        "civ": 23.82,
+        "piv": 31.2
+      },
+      {
+        "k": 1430,
+        "civ": 24.52,
+        "piv": null
+      },
+      {
+        "k": 1440,
+        "civ": 25.12,
+        "piv": null
+      },
+      {
+        "k": 1450,
+        "civ": 25.95,
+        "piv": 35.93
+      },
+      {
+        "k": 1460,
+        "civ": 26.45,
+        "piv": 29.5
+      },
+      {
+        "k": 1470,
+        "civ": 27.33,
+        "piv": 48.08
+      },
+      {
+        "k": 1480,
+        "civ": 27.4,
+        "piv": 29.51
+      },
+      {
+        "k": 1500,
+        "civ": 29.25,
+        "piv": 30.59
+      },
+      {
+        "k": 1520,
+        "civ": 29.67,
+        "piv": 38.99
+      }
+    ],
+    "pcr": 0.81,
+    "pcr_chg": 0.31,
+    "max_pain": 1250,
+    "atm_iv": 20.885,
+    "straddle": 47.5,
+    "range": [
+      1281.1529,
+      1363.5731
+    ],
+    "walls": [
+      1200,
+      1350
+    ],
+    "iv1": [
+      1264.6764,
+      1377.7438
+    ],
+    "conviction": 60,
+    "verdict": "Writers box 1,200-1,350; call short covering near ATM, 1200 puts being unwound; PCR 0.81",
+    "bias": "neutral",
+    "confidence": "low",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 1350 (17,922) = resistance; heaviest put OI at 1200 (17,365) = support. Next walls: calls 1400, 1330; puts 1150, 1300.",
+      "OI change: call wall 1350 strengthening (+2,173); put wall 1200 being unwound (-134); biggest additions: calls 1350 (+2,173), puts 1240 (+311); biggest cuts: calls 1300 (-4,471), puts 1330 (-447).",
+      "Vs previous snapshot (06-Nov-2026 15:29:29): max call OI unchanged at 1350; max put OI unchanged at 1200.",
+      "PCR (OI) 0.81: balanced; change-in-OI PCR 0.31 (more calls than puts added today).",
+      "Max pain 1250 is 5.30% below spot 1,320 with 15.3 days to expiry.",
+      "ATM IV 20.9%; skew: OTM put 1260 IV 23.9 vs OTM call 1380 IV 21.8 (puts richer = downside hedging demand). ATM straddle 47.50 implies about ±47.50 (3.6%) -> 1,272-1,368 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Short Covering on 7/11 strikes (call short covering); puts: Short Buildup on 6/11 strikes (put writing)."
+    ],
+    "chain_ts": "06-Nov-2026 15:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:46+05:30"
+  },
+  "HDFCBANK": {
+    "symbol": "HDFCBANK",
+    "spot": 788.25,
+    "chg": 28.25,
+    "chg_pct": 3.7171,
+    "expiry": "23-Nov-2026",
+    "expiries": [
+      "23-Nov-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 670,
+        "coi": 2074,
+        "poi": 4160,
+        "cchg": -23,
+        "pchg": -57,
+        "civ": 0,
+        "piv": 44.13
+      },
+      {
+        "k": 680,
+        "coi": 4696,
+        "poi": 8815,
+        "cchg": -334,
+        "pchg": 153,
+        "civ": 0,
+        "piv": 41.52
+      },
+      {
+        "k": 690,
+        "coi": 10590,
+        "poi": 10668,
+        "cchg": -90,
+        "pchg": -5,
+        "civ": 0,
+        "piv": 39.68
+      },
+      {
+        "k": 700,
+        "coi": 15425,
+        "poi": 19133,
+        "cchg": -1696,
+        "pchg": 642,
+        "civ": 14.53,
+        "piv": 37.54
+      },
+      {
+        "k": 710,
+        "coi": 8979,
+        "poi": 0,
+        "cchg": -932,
+        "pchg": 0,
+        "civ": 0,
+        "piv": 0
+      },
+      {
+        "k": 720,
+        "coi": 9480,
+        "poi": 0,
+        "cchg": -991,
+        "pchg": 0,
+        "civ": 0,
+        "piv": 0
+      },
+      {
+        "k": 730,
+        "coi": 0,
+        "poi": 12611,
+        "cchg": 0,
+        "pchg": 3075,
+        "civ": 0,
+        "piv": 30.73
+      },
+      {
+        "k": 740,
+        "coi": 11523,
+        "poi": 0,
+        "cchg": -7031,
+        "pchg": 0,
+        "civ": 20.87,
+        "piv": 0
+      },
+      {
+        "k": 750,
+        "coi": 11476,
+        "poi": 12851,
+        "cchg": -1823,
+        "pchg": 2860,
+        "civ": 20.7,
+        "piv": 27.12
+      },
+      {
+        "k": 760,
+        "coi": 9415,
+        "poi": 10042,
+        "cchg": -3097,
+        "pchg": 4474,
+        "civ": 22.53,
+        "piv": 26.28
+      },
+      {
+        "k": 770,
+        "coi": 11252,
+        "poi": 0,
+        "cchg": 1040,
+        "pchg": 0,
+        "civ": 21.49,
+        "piv": 0
+      },
+      {
+        "k": 780,
+        "coi": 0,
+        "poi": 6036,
+        "cchg": 0,
+        "pchg": 5073,
+        "civ": 0,
+        "piv": 25.72
+      },
+      {
+        "k": 790,
+        "coi": 11102,
+        "poi": 2795,
+        "cchg": 8070,
+        "pchg": 2645,
+        "civ": 23.13,
+        "piv": 26.03
+      },
+      {
+        "k": 800,
+        "coi": 25328,
+        "poi": 3194,
+        "cchg": 3533,
+        "pchg": -5,
+        "civ": 24.03,
+        "piv": 27.03
+      },
+      {
+        "k": 810,
+        "coi": 4472,
+        "poi": 0,
+        "cchg": 2762,
+        "pchg": 0,
+        "civ": 25.38,
+        "piv": 0
+      },
+      {
+        "k": 830,
+        "coi": 1660,
+        "poi": 48,
+        "cchg": 1660,
+        "pchg": 48,
+        "civ": 27.36,
+        "piv": 29.12
+      }
+    ],
+    "smile": [
+      {
+        "k": 580,
+        "civ": 54.04,
+        "piv": null
+      },
+      {
+        "k": 600,
+        "civ": null,
+        "piv": 58.66
+      },
+      {
+        "k": 610,
+        "civ": 44.4,
+        "piv": 57.19
+      },
+      {
+        "k": 620,
+        "civ": null,
+        "piv": 54.77
+      },
+      {
+        "k": 630,
+        "civ": null,
+        "piv": 52.27
+      },
+      {
+        "k": 640,
+        "civ": null,
+        "piv": 50.82
+      },
+      {
+        "k": 660,
+        "civ": null,
+        "piv": 46.23
+      },
+      {
+        "k": 670,
+        "civ": null,
+        "piv": 44.13
+      },
+      {
+        "k": 680,
+        "civ": null,
+        "piv": 41.52
+      },
+      {
+        "k": 690,
+        "civ": null,
+        "piv": 39.68
+      },
+      {
+        "k": 700,
+        "civ": 14.53,
+        "piv": 37.54
+      },
+      {
+        "k": 730,
+        "civ": null,
+        "piv": 30.73
+      },
+      {
+        "k": 740,
+        "civ": 20.87,
+        "piv": null
+      },
+      {
+        "k": 750,
+        "civ": 20.7,
+        "piv": 27.12
+      },
+      {
+        "k": 760,
+        "civ": 22.53,
+        "piv": 26.28
+      },
+      {
+        "k": 770,
+        "civ": 21.49,
+        "piv": null
+      },
+      {
+        "k": 780,
+        "civ": null,
+        "piv": 25.72
+      },
+      {
+        "k": 790,
+        "civ": 23.13,
+        "piv": 26.03
+      },
+      {
+        "k": 800,
+        "civ": 24.03,
+        "piv": 27.03
+      },
+      {
+        "k": 810,
+        "civ": 25.38,
+        "piv": null
+      },
+      {
+        "k": 830,
+        "civ": 27.36,
+        "piv": 29.12
+      }
+    ],
+    "pcr": 0.74,
+    "pcr_chg": 19.31,
+    "max_pain": 720,
+    "atm_iv": 24.58,
+    "straddle": 0,
+    "range": [
+      749.7917,
+      812.4234
+    ],
+    "walls": [
+      700,
+      800
+    ],
+    "iv1": [
+      749.5139,
+      828.988
+    ],
+    "conviction": 56,
+    "verdict": "Writers box 700-800; call writing near ATM, put buying near ATM; PCR 0.74",
+    "bias": "mildly bearish",
+    "confidence": "moderate",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 800 (25,328) = resistance; heaviest put OI at 700 (19,133) = support. Next walls: calls 790, 810; puts 750, 730.",
+      "OI change: call wall 800 strengthening (+3,533); put wall 700 strengthening (+642); biggest additions: calls 790 (+8,070), puts 780 (+5,073); biggest cuts: calls 740 (-7,031), puts 690 (-5).",
+      "Vs previous snapshot (06-Nov-2026 15:40:00): max call OI unchanged at 800; max put OI unchanged at 700.",
+      "PCR (OI) 0.74: balanced; change-in-OI PCR 19.31 (more puts than calls added today).",
+      "Max pain 720 is 8.66% below spot 788 with 15.3 days to expiry.",
+      "ATM IV 24.6%; skew: OTM put 750 IV 27.1 vs OTM call 830 IV 27.4 (flat). ATM straddle 0 implies about ±0 (0.0%) -> 788-788 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Short Buildup on 4/9 strikes (call writing); puts: Long Buildup on 3/9 strikes (put buying)."
+    ],
+    "chain_ts": "07-Nov-2026 12:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:51+05:30"
+  },
+  "ICICIBANK": {
+    "symbol": "ICICIBANK",
+    "spot": 1571.2,
+    "chg": 71.2,
+    "chg_pct": 4.7467,
+    "expiry": "23-Nov-2026",
+    "expiries": [
+      "23-Nov-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 1210,
+        "coi": 0,
+        "poi": 26,
+        "cchg": 0,
+        "pchg": -9,
+        "civ": 0,
+        "piv": 50.83
+      },
+      {
+        "k": 1230,
+        "coi": 0,
+        "poi": 54,
+        "cchg": 0,
+        "pchg": -16,
+        "civ": 0,
+        "piv": 51.59
+      },
+      {
+        "k": 1250,
+        "coi": 12,
+        "poi": 0,
+        "cchg": 0,
+        "pchg": 0,
+        "civ": 0,
+        "piv": 0
+      },
+      {
+        "k": 1260,
+        "coi": 26,
+        "poi": 0,
+        "cchg": 0,
+        "pchg": 0,
+        "civ": 0,
+        "piv": 0
+      },
+      {
+        "k": 1320,
+        "coi": 0,
+        "poi": 1631,
+        "cchg": 0,
+        "pchg": 214,
+        "civ": 0,
+        "piv": 42.55
+      },
+      {
+        "k": 1350,
+        "coi": 0,
+        "poi": 624,
+        "cchg": 0,
+        "pchg": 63,
+        "civ": 0,
+        "piv": 39.07
+      },
+      {
+        "k": 1490,
+        "coi": 0,
+        "poi": 3350,
+        "cchg": 0,
+        "pchg": 1808,
+        "civ": 0,
+        "piv": 25.75
+      },
+      {
+        "k": 1530,
+        "coi": 0,
+        "poi": 1630,
+        "cchg": 0,
+        "pchg": 1494,
+        "civ": 0,
+        "piv": 24.73
+      },
+      {
+        "k": 1570,
+        "coi": 1461,
+        "poi": 0,
+        "cchg": 1332,
+        "pchg": 0,
+        "civ": 18.32,
+        "piv": 0
+      },
+      {
+        "k": 1590,
+        "coi": 633,
+        "poi": 0,
+        "cchg": 610,
+        "pchg": 0,
+        "civ": 19.26,
+        "piv": 0
+      },
+      {
+        "k": 1610,
+        "coi": 780,
+        "poi": 0,
+        "cchg": 749,
+        "pchg": 0,
+        "civ": 20.08,
+        "piv": 0
+      },
+      {
+        "k": 1620,
+        "coi": 1314,
+        "poi": 224,
+        "cchg": 1033,
+        "pchg": 224,
+        "civ": 20.73,
+        "piv": 27.96
+      },
+      {
+        "k": 1640,
+        "coi": 499,
+        "poi": 60,
+        "cchg": 480,
+        "pchg": 60,
+        "civ": 21.66,
+        "piv": 30.05
+      },
+      {
+        "k": 1660,
+        "coi": 219,
+        "poi": 0,
+        "cchg": 219,
+        "pchg": 0,
+        "civ": 22.82,
+        "piv": 0
+      },
+      {
+        "k": 1690,
+        "coi": 0,
+        "poi": 0,
+        "cchg": 0,
+        "pchg": 0,
+        "civ": 0,
+        "piv": 0
+      }
+    ],
+    "smile": [
+      {
+        "k": 1210,
+        "civ": null,
+        "piv": 50.83
+      },
+      {
+        "k": 1230,
+        "civ": null,
+        "piv": 51.59
+      },
+      {
+        "k": 1320,
+        "civ": null,
+        "piv": 42.55
+      },
+      {
+        "k": 1350,
+        "civ": null,
+        "piv": 39.07
+      },
+      {
+        "k": 1490,
+        "civ": null,
+        "piv": 25.75
+      },
+      {
+        "k": 1530,
+        "civ": null,
+        "piv": 24.73
+      },
+      {
+        "k": 1570,
+        "civ": 18.32,
+        "piv": null
+      },
+      {
+        "k": 1590,
+        "civ": 19.26,
+        "piv": null
+      },
+      {
+        "k": 1610,
+        "civ": 20.08,
+        "piv": null
+      },
+      {
+        "k": 1620,
+        "civ": 20.73,
+        "piv": 27.96
+      },
+      {
+        "k": 1640,
+        "civ": 21.66,
+        "piv": 30.05
+      },
+      {
+        "k": 1660,
+        "civ": 22.82,
+        "piv": null
+      }
+    ],
+    "pcr": 1.54,
+    "pcr_chg": 0.87,
+    "max_pain": 1570,
+    "atm_iv": 18.32,
+    "straddle": 5.9,
+    "range": [
+      1519.5754,
+      1610.5295
+    ],
+    "walls": [
+      1490,
+      1620
+    ],
+    "iv1": [
+      1513.2847,
+      1631.3318
+    ],
+    "conviction": 74,
+    "verdict": "Writers box 1,490-1,620; max put OI moved down, call writing near ATM; PCR 1.54",
+    "bias": "mildly bearish",
+    "confidence": "moderate",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 1620 (1,314) = resistance; heaviest put OI at 1490 (3,350) = support. Next walls: calls 1610, 1590; puts 1530, 1350.",
+      "OI change: call wall 1620 strengthening (+1,033); put wall 1490 strengthening (+1,808); biggest additions: calls 1570 (+1,332), puts 1490 (+1,808).",
+      "Vs previous snapshot (06-Nov-2026 15:40:00): max call OI shifted 1600 -> 1620; max put OI shifted 1500 -> 1490.",
+      "PCR (OI) 1.54: put-heavy (writers supporting dips); change-in-OI PCR 0.87 (more calls than puts added today).",
+      "Max pain 1570 is 0.08% below spot 1,571 with 15.3 days to expiry.",
+      "ATM IV 18.3%; skew: OTM put 1530 IV 24.7 vs OTM call 1640 IV 21.7 (puts richer = downside hedging demand). ATM straddle 5.90 implies about ±5.90 (0.4%) -> 1,565-1,577 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Short Buildup on 5/11 strikes (call writing); puts: Long Buildup on 4/11 strikes (put buying)."
+    ],
+    "chain_ts": "07-Nov-2026 12:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:56+05:30"
+  },
+  "INFY": {
+    "symbol": "INFY",
+    "spot": 1181.4,
+    "chg": 14,
+    "chg_pct": 1.1992,
+    "expiry": "23-Nov-2026",
+    "expiries": [
+      "23-Nov-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 854,
+        "coi": 0,
+        "poi": 214,
+        "cchg": 0,
+        "pchg": -2,
+        "civ": 0,
+        "piv": 64.75
+      },
+      {
+        "k": 960,
+        "coi": 0,
+        "poi": 0,
+        "cchg": 0,
+        "pchg": 0,
+        "civ": 51.44,
+        "piv": 0
+      },
+      {
+        "k": 1060,
+        "coi": 4,
+        "poi": 0,
+        "cchg": 1,
+        "pchg": 0,
+        "civ": 0,
+        "piv": 0
+      },
+      {
+        "k": 1180,
+        "coi": 0,
+        "poi": 1720,
+        "cchg": 0,
+        "pchg": 308,
+        "civ": 0,
+        "piv": 34.31
+      },
+      {
+        "k": 1194,
+        "coi": 8501,
+        "poi": 0,
+        "cchg": 5295,
+        "pchg": 0,
+        "civ": 27.01,
+        "piv": 0
+      },
+      {
+        "k": 1234,
+        "coi": 2387,
+        "poi": 0,
+        "cchg": 708,
+        "pchg": 0,
+        "civ": 28.69,
+        "piv": 0
+      },
+      {
+        "k": 1254,
+        "coi": 2483,
+        "poi": 0,
+        "cchg": 881,
+        "pchg": 0,
+        "civ": 29.62,
+        "piv": 0
+      },
+      {
+        "k": 1280,
+        "coi": 1351,
+        "poi": 7,
+        "cchg": 1088,
+        "pchg": 1,
+        "civ": 31.06,
+        "piv": 46.64
+      }
+    ],
+    "smile": [
+      {
+        "k": 854,
+        "civ": null,
+        "piv": 64.75
+      },
+      {
+        "k": 960,
+        "civ": 51.44,
+        "piv": null
+      },
+      {
+        "k": 1180,
+        "civ": null,
+        "piv": 34.31
+      },
+      {
+        "k": 1194,
+        "civ": 27.01,
+        "piv": null
+      },
+      {
+        "k": 1234,
+        "civ": 28.69,
+        "piv": null
+      },
+      {
+        "k": 1254,
+        "civ": 29.62,
+        "piv": null
+      },
+      {
+        "k": 1280,
+        "civ": 31.06,
+        "piv": 46.64
+      }
+    ],
+    "pcr": 0.13,
+    "pcr_chg": 0.04,
+    "max_pain": 1194,
+    "atm_iv": 34.31,
+    "straddle": 0,
+    "range": [
+      1146.2107,
+      1225.4952
+    ],
+    "walls": [
+      1180,
+      1194
+    ],
+    "iv1": [
+      1101.1583,
+      1267.4889
+    ],
+    "conviction": 42,
+    "verdict": "Writers box 1,180-1,194; max put OI moved up, max call OI moved down; PCR 0.13",
+    "bias": "neutral",
+    "confidence": "low",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 1194 (8,501) = resistance; heaviest put OI at 1180 (1,720) = support. Next walls: calls 1254, 1234; puts 1060.",
+      "OI change: call wall 1194 strengthening (+5,295); put wall 1180 strengthening (+308); biggest additions: calls 1194 (+5,295), puts 1180 (+308).",
+      "Vs previous snapshot (06-Nov-2026 15:40:00): max call OI shifted 1200 -> 1194; max put OI shifted 1034 -> 1180.",
+      "PCR (OI) 0.13: call-heavy (writers capping upside); change-in-OI PCR 0.04 (more calls than puts added today).",
+      "Max pain 1194 is 1.07% above spot 1,181 with 15.3 days to expiry.",
+      "ATM IV 34.3%. ATM straddle 0 implies about ±0 (0.0%) -> 1,181-1,181 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Long Buildup on 5/8 strikes (call buying); puts: Short Buildup on 1/8 strikes (put writing)."
+    ],
+    "chain_ts": "07-Nov-2026 12:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:53+05:30"
+  },
+  "SBIN": {
+    "symbol": "SBIN",
+    "spot": 1018.5,
+    "chg": 12.1,
+    "chg_pct": 1.2023,
+    "expiry": "23-Nov-2026",
+    "expiries": [
+      "23-Nov-2026",
+      "29-Dec-2026"
+    ],
+    "bars": [
+      {
+        "k": 900,
+        "coi": 507,
+        "poi": 3206,
+        "cchg": 2,
+        "pchg": -104,
+        "civ": 0,
+        "piv": 33.72
+      },
+      {
+        "k": 910,
+        "coi": 188,
+        "poi": 697,
+        "cchg": -2,
+        "pchg": -35,
+        "civ": 0,
+        "piv": 32.05
+      },
+      {
+        "k": 920,
+        "coi": 154,
+        "poi": 1941,
+        "cchg": -1,
+        "pchg": -75,
+        "civ": 0,
+        "piv": 31.28
+      },
+      {
+        "k": 930,
+        "coi": 247,
+        "poi": 1322,
+        "cchg": -1,
+        "pchg": 12,
+        "civ": 0,
+        "piv": 30.3
+      },
+      {
+        "k": 940,
+        "coi": 526,
+        "poi": 2379,
+        "cchg": 2,
+        "pchg": -254,
+        "civ": 22.96,
+        "piv": 29.53
+      },
+      {
+        "k": 950,
+        "coi": 2472,
+        "poi": 4692,
+        "cchg": -40,
+        "pchg": -527,
+        "civ": 21.3,
+        "piv": 28.56
+      },
+      {
+        "k": 960,
+        "coi": 2883,
+        "poi": 5347,
+        "cchg": -118,
+        "pchg": -257,
+        "civ": 20.77,
+        "piv": 27.79
+      },
+      {
+        "k": 970,
+        "coi": 2291,
+        "poi": 3655,
+        "cchg": -283,
+        "pchg": -346,
+        "civ": 21.35,
+        "piv": 26.87
+      },
+      {
+        "k": 980,
+        "coi": 4006,
+        "poi": 4012,
+        "cchg": -846,
+        "pchg": -513,
+        "civ": 20.38,
+        "piv": 26.21
+      },
+      {
+        "k": 990,
+        "coi": 3187,
+        "poi": 2599,
+        "cchg": -377,
+        "pchg": -97,
+        "civ": 21.16,
+        "piv": 25.55
+      },
+      {
+        "k": 1000,
+        "coi": 11168,
+        "poi": 6351,
+        "cchg": -5040,
+        "pchg": 211,
+        "civ": 20.81,
+        "piv": 25.17
+      },
+      {
+        "k": 1010,
+        "coi": 3647,
+        "poi": 2503,
+        "cchg": -924,
+        "pchg": 567,
+        "civ": 21,
+        "piv": 25.04
+      },
+      {
+        "k": 1020,
+        "coi": 6749,
+        "poi": 1727,
+        "cchg": 74,
+        "pchg": 844,
+        "civ": 21.53,
+        "piv": 25.13
+      },
+      {
+        "k": 1030,
+        "coi": 5575,
+        "poi": 649,
+        "cchg": 485,
+        "pchg": 214,
+        "civ": 21.59,
+        "piv": 25.44
+      },
+      {
+        "k": 1040,
+        "coi": 2906,
+        "poi": 591,
+        "cchg": 347,
+        "pchg": 384,
+        "civ": 22.14,
+        "piv": 25.94
+      },
+      {
+        "k": 1050,
+        "coi": 7203,
+        "poi": 1802,
+        "cchg": 285,
+        "pchg": 11,
+        "civ": 22.58,
+        "piv": 26.69
+      },
+      {
+        "k": 1060,
+        "coi": 2750,
+        "poi": 221,
+        "cchg": 44,
+        "pchg": -5,
+        "civ": 23.04,
+        "piv": 26.5
+      },
+      {
+        "k": 1070,
+        "coi": 1371,
+        "poi": 56,
+        "cchg": 110,
+        "pchg": 32,
+        "civ": 23.45,
+        "piv": 25.35
+      },
+      {
+        "k": 1080,
+        "coi": 1936,
+        "poi": 81,
+        "cchg": -42,
+        "pchg": 4,
+        "civ": 24.26,
+        "piv": 28.04
+      },
+      {
+        "k": 1090,
+        "coi": 733,
+        "poi": 0,
+        "cchg": 167,
+        "pchg": 0,
+        "civ": 24.95,
+        "piv": 0
+      },
+      {
+        "k": 1100,
+        "coi": 6780,
+        "poi": 5573,
+        "cchg": -760,
+        "pchg": -53,
+        "civ": 25.75,
+        "piv": 30.39
+      },
+      {
+        "k": 1110,
+        "coi": 167,
+        "poi": 0,
+        "cchg": 167,
+        "pchg": 0,
+        "civ": 26.55,
+        "piv": 0
+      },
+      {
+        "k": 1120,
+        "coi": 1990,
+        "poi": 2920,
+        "cchg": 33,
+        "pchg": -38,
+        "civ": 27.31,
+        "piv": 36.13
+      },
+      {
+        "k": 1140,
+        "coi": 338,
+        "poi": 2,
+        "cchg": 338,
+        "pchg": 2,
+        "civ": 29.34,
+        "piv": 45.33
+      },
+      {
+        "k": 1160,
+        "coi": 533,
+        "poi": 0,
+        "cchg": 54,
+        "pchg": 0,
+        "civ": 30.98,
+        "piv": 0
+      }
+    ],
+    "smile": [
+      {
+        "k": 800,
+        "civ": 58.57,
+        "piv": 48.29
+      },
+      {
+        "k": 820,
+        "civ": null,
+        "piv": 43.93
+      },
+      {
+        "k": 840,
+        "civ": null,
+        "piv": 39.64
+      },
+      {
+        "k": 850,
+        "civ": null,
+        "piv": 39.01
+      },
+      {
+        "k": 860,
+        "civ": null,
+        "piv": 37.46
+      },
+      {
+        "k": 870,
+        "civ": 20.05,
+        "piv": 36.34
+      },
+      {
+        "k": 880,
+        "civ": null,
+        "piv": 34.57
+      },
+      {
+        "k": 890,
+        "civ": null,
+        "piv": 34.25
+      },
+      {
+        "k": 900,
+        "civ": null,
+        "piv": 33.72
+      },
+      {
+        "k": 910,
+        "civ": null,
+        "piv": 32.05
+      },
+      {
+        "k": 920,
+        "civ": null,
+        "piv": 31.28
+      },
+      {
+        "k": 930,
+        "civ": null,
+        "piv": 30.3
+      },
+      {
+        "k": 940,
+        "civ": 22.96,
+        "piv": 29.53
+      },
+      {
+        "k": 950,
+        "civ": 21.3,
+        "piv": 28.56
+      },
+      {
+        "k": 960,
+        "civ": 20.77,
+        "piv": 27.79
+      },
+      {
+        "k": 970,
+        "civ": 21.35,
+        "piv": 26.87
+      },
+      {
+        "k": 980,
+        "civ": 20.38,
+        "piv": 26.21
+      },
+      {
+        "k": 990,
+        "civ": 21.16,
+        "piv": 25.55
+      },
+      {
+        "k": 1000,
+        "civ": 20.81,
+        "piv": 25.17
+      },
+      {
+        "k": 1010,
+        "civ": 21,
+        "piv": 25.04
+      },
+      {
+        "k": 1020,
+        "civ": 21.53,
+        "piv": 25.13
+      },
+      {
+        "k": 1030,
+        "civ": 21.59,
+        "piv": 25.44
+      },
+      {
+        "k": 1040,
+        "civ": 22.14,
+        "piv": 25.94
+      },
+      {
+        "k": 1050,
+        "civ": 22.58,
+        "piv": 26.69
+      },
+      {
+        "k": 1060,
+        "civ": 23.04,
+        "piv": 26.5
+      },
+      {
+        "k": 1070,
+        "civ": 23.45,
+        "piv": 25.35
+      },
+      {
+        "k": 1080,
+        "civ": 24.26,
+        "piv": 28.04
+      },
+      {
+        "k": 1090,
+        "civ": 24.95,
+        "piv": null
+      },
+      {
+        "k": 1100,
+        "civ": 25.75,
+        "piv": 30.39
+      },
+      {
+        "k": 1110,
+        "civ": 26.55,
+        "piv": null
+      },
+      {
+        "k": 1120,
+        "civ": 27.31,
+        "piv": 36.13
+      },
+      {
+        "k": 1140,
+        "civ": 29.34,
+        "piv": 45.33
+      },
+      {
+        "k": 1160,
+        "civ": 30.98,
+        "piv": null
+      },
+      {
+        "k": 1200,
+        "civ": 35.06,
+        "piv": 38.01
+      }
+    ],
+    "pcr": 0.8,
+    "pcr_chg": 0.03,
+    "max_pain": 1000,
+    "atm_iv": 23.33,
+    "straddle": 40.9,
+    "range": [
+      984.5602,
+      1046.3389
+    ],
+    "walls": [
+      1000,
+      1050
+    ],
+    "iv1": [
+      970.9339,
+      1068.3964
+    ],
+    "conviction": 49,
+    "verdict": "Writers box 1,000-1,050; call buying near ATM, put writing near ATM; PCR 0.8",
+    "bias": "mildly bullish",
+    "confidence": "moderate",
+    "bullets": [
+      "Writers' positioning: heaviest call OI at 1050 (7,203) = resistance; heaviest put OI at 1000 (6,351) = support. Next walls: calls 1100, 1020; puts 960, 950.",
+      "OI change: call wall 1050 strengthening (+285); put wall 1000 strengthening (+211); biggest additions: calls 1030 (+485), puts 1020 (+844); biggest cuts: calls 1000 (-5,040), puts 950 (-527).",
+      "Vs previous snapshot (06-Nov-2026 15:29:38): max call OI unchanged at 1050; max put OI unchanged at 1000.",
+      "PCR (OI) 0.8: balanced; change-in-OI PCR 0.03 (more calls than puts added today).",
+      "Max pain 1000 is 1.82% below spot 1,018 with 15.3 days to expiry.",
+      "ATM IV 23.3%; skew: OTM put 970 IV 26.9 vs OTM call 1070 IV 23.4 (puts richer = downside hedging demand). ATM straddle 40.90 implies about ±40.90 (4.0%) -> 978-1,059 by expiry.",
+      "Near-ATM buildup (ATM ±5 strikes): calls: Long Buildup on 6/11 strikes (call buying); puts: Short Buildup on 7/11 strikes (put writing)."
+    ],
+    "chain_ts": "06-Nov-2026 15:40:00",
+    "lot": null,
+    "_published": "2026-11-08T07:15:57+05:30"
+  }
+}
