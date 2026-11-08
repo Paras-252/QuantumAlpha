@@ -5,12 +5,33 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
+import fs from 'fs';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import WebSocket, { WebSocketServer } from 'ws';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Auto-load .env file into process.env if present
+try {
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const raw = fs.readFileSync(envPath, 'utf8');
+    raw.split(/\r?\n/).forEach(line => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) return;
+      const idx = trimmed.indexOf('=');
+      if (idx !== -1) {
+        const k = trimmed.slice(0, idx).trim();
+        const v = trimmed.slice(idx + 1).trim();
+        if (!process.env[k]) {
+          process.env[k] = v;
+        }
+      }
+    });
+  }
+} catch (e) {}
 
 const app = express();
 const server = http.createServer(app);
@@ -31,7 +52,25 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 2b. Generate Daily Access Token from request_token + api_key + api_secret
+// 2b. Auto-fetch Kite credentials from .env
+app.get('/api/kite/config', (req, res) => {
+  const apiKey = process.env.VITE_KITE_API_KEY || process.env.KITE_API_KEY || '';
+  const apiSecret = process.env.VITE_KITE_API_SECRET || process.env.KITE_API_SECRET || '';
+  const clientId = process.env.KITE_CLIENT_ID || process.env.VITE_KITE_CLIENT_ID || '';
+  const accessToken = process.env.VITE_KITE_ACCESS_TOKEN || process.env.KITE_ACCESS_TOKEN || '';
+
+  res.json({
+    status: 'success',
+    apiKey,
+    apiSecret,
+    hasApiSecret: Boolean(apiSecret),
+    clientId,
+    accessToken,
+    relayHost: process.env.VITE_KITE_RELAY_HOST || ''
+  });
+});
+
+// 2c. Generate Daily Access Token from request_token + api_key + api_secret
 app.post('/api/kite/session', async (req, res) => {
   try {
     const apiKey = req.body.apiKey || process.env.VITE_KITE_API_KEY;

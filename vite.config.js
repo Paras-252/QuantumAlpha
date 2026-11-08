@@ -6,6 +6,29 @@ function viteKiteSessionPlugin() {
   return {
     name: 'vite-kite-session-plugin',
     configureServer(server) {
+      // 1. Return saved Kite configuration & .env credentials
+      server.middlewares.use('/api/kite/config', (req, res) => {
+        const env = loadEnv('', process.cwd(), '');
+        const apiKey = env.VITE_KITE_API_KEY || env.KITE_API_KEY || '';
+        const apiSecret = env.VITE_KITE_API_SECRET || env.KITE_API_SECRET || '';
+        const clientId = env.KITE_CLIENT_ID || env.VITE_KITE_CLIENT_ID || '';
+        const accessToken = env.VITE_KITE_ACCESS_TOKEN || env.KITE_ACCESS_TOKEN || '';
+        const relayHost = env.VITE_KITE_RELAY_HOST || '';
+
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({
+          status: 'success',
+          apiKey,
+          apiSecret,
+          hasApiSecret: Boolean(apiSecret),
+          clientId,
+          accessToken,
+          relayHost
+        }));
+      });
+
+      // 2. Token exchange endpoint
       server.middlewares.use('/api/kite/session', (req, res) => {
         if (req.method !== 'POST') {
           res.statusCode = 405;

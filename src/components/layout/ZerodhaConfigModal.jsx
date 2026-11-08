@@ -34,7 +34,8 @@ export default function ZerodhaConfigModal() {
     startKiteSimulation,
     stopKiteSimulation,
     isKiteSimulating,
-    generateKiteSession
+    generateKiteSession,
+    fetchKiteCredentials
   } = useMarketData();
 
   const [apiKey, setApiKey] = useState(zerodhaConfig.apiKey || '');
@@ -49,6 +50,19 @@ export default function ZerodhaConfigModal() {
   const [showTokenHelp, setShowTokenHelp] = useState(false);
   const [showIpHelp, setShowIpHelp] = useState(true);
   const [copiedKey, setCopiedKey] = useState(false);
+
+  // Auto-fetch credentials from backend / .env when modal opens
+  React.useEffect(() => {
+    if (isZerodhaModalOpen && fetchKiteCredentials) {
+      fetchKiteCredentials().then(c => {
+        if (c) {
+          if (c.apiKey) setApiKey(c.apiKey);
+          if (c.apiSecret) setApiSecret(c.apiSecret);
+          if (c.accessToken) setAccessToken(c.accessToken);
+        }
+      });
+    }
+  }, [isZerodhaModalOpen]);
 
   // Sync state if context updates
   React.useEffect(() => {
@@ -66,16 +80,36 @@ export default function ZerodhaConfigModal() {
   if (!isZerodhaModalOpen) return null;
 
   const handleSaveAndConnect = () => {
-    updateZerodhaConfig({ apiKey, apiSecret, accessToken, mode, connectionMode, relayHost });
-    if (!isZerodhaLive) {
-      toggleZerodhaLive(true);
-    }
+    const finalKey = apiKey.trim() || zerodhaConfig.apiKey;
+    const finalSecret = apiSecret.trim() || zerodhaConfig.apiSecret;
+    const finalToken = accessToken.trim() || zerodhaConfig.accessToken;
+
+    updateZerodhaConfig({
+      apiKey: finalKey,
+      apiSecret: finalSecret,
+      accessToken: finalToken,
+      mode,
+      connectionMode,
+      relayHost
+    });
+    toggleZerodhaLive(true);
   };
 
   const handleToggleFeed = () => {
     const next = !isZerodhaLive;
     if (next) {
-      updateZerodhaConfig({ apiKey, apiSecret, accessToken, mode, connectionMode, relayHost });
+      const finalKey = apiKey.trim() || zerodhaConfig.apiKey;
+      const finalSecret = apiSecret.trim() || zerodhaConfig.apiSecret;
+      const finalToken = accessToken.trim() || zerodhaConfig.accessToken;
+
+      updateZerodhaConfig({
+        apiKey: finalKey,
+        apiSecret: finalSecret,
+        accessToken: finalToken,
+        mode,
+        connectionMode,
+        relayHost
+      });
       toggleZerodhaLive(true);
     } else {
       toggleZerodhaLive(false);
@@ -205,12 +239,33 @@ export default function ZerodhaConfigModal() {
 
         {/* Credentials Form */}
         <div className="mt-5 space-y-4">
+          <div className="flex items-center justify-between pb-1 border-b border-hairline/60">
+            <span className="text-xs font-bold text-foreground">API Credentials &amp; Permanent Storage</span>
+            <button
+              type="button"
+              onClick={async () => {
+                const res = await fetchKiteCredentials();
+                if (res) {
+                  if (res.apiKey) setApiKey(res.apiKey);
+                  if (res.apiSecret) setApiSecret(res.apiSecret);
+                  if (res.accessToken) setAccessToken(res.accessToken);
+                }
+              }}
+              className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline cursor-pointer"
+            >
+              <RefreshCw className="h-3 w-3" />
+              <span>Auto-Fetch from .env</span>
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* API Key */}
             <div>
               <label className="block text-xs font-bold text-foreground mb-1.5 flex items-center justify-between">
                 <span>Kite API Key</span>
-                <span className="text-[10px] font-normal text-muted-foreground">Permanent</span>
+                <span className="text-[10px] font-bold text-up flex items-center gap-0.5">
+                  <Check className="h-3 w-3" /> Saved Permanently
+                </span>
               </label>
               <div className="relative">
                 <input
@@ -227,7 +282,9 @@ export default function ZerodhaConfigModal() {
             <div>
               <label className="block text-xs font-bold text-foreground mb-1.5 flex items-center justify-between">
                 <span>Kite API Secret</span>
-                <span className="text-[10px] font-normal text-muted-foreground">Permanent</span>
+                <span className="text-[10px] font-bold text-up flex items-center gap-0.5">
+                  <Check className="h-3 w-3" /> Saved Permanently
+                </span>
               </label>
               <div className="relative">
                 <input

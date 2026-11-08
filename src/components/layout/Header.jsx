@@ -43,6 +43,7 @@ export default function Header() {
     isLiveSimulating,
     setIsLiveSimulating,
     isZerodhaLive,
+    toggleZerodhaLive,
     zerodhaStatus,
     setIsZerodhaModalOpen,
     isKiteSimulating,
@@ -274,13 +275,19 @@ export default function Header() {
 
             {/* Zerodha Kite Ticker Live Pill */}
             <button
-              onClick={() => setIsZerodhaModalOpen(true)}
+              onClick={() => {
+                if (!isZerodhaLive) {
+                  toggleZerodhaLive(true);
+                } else {
+                  setIsZerodhaModalOpen(true);
+                }
+              }}
               title={
                 isZerodhaLive
                   ? (isKiteSimulating
                       ? 'Kite Ticker: Simulating Live Ticks (Click to configure)'
                       : `Kite Live Ticker: ${zerodhaStatus} (${zerodhaStats.ticksCount} ticks ingested)`)
-                  : 'Zerodha Kite Ticker: OFF (Click to turn ON and configure)'
+                  : 'Zerodha Kite Ticker: OFF (Click to turn ON and auto-fetch credentials)'
               }
               className={`inline-flex h-7 shrink-0 items-center gap-1.5 rounded-full px-2.5 text-[11.5px] font-semibold transition-all border outline-none focus-visible:ring-2 focus-visible:ring-brand shadow-2xs ${
                 isZerodhaLive && (zerodhaStatus === 'CONNECTED' || isKiteSimulating)

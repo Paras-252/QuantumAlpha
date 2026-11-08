@@ -117,19 +117,61 @@ export function MarketDataProvider({ children }) {
     return localStorage.getItem('tredye.zerodha.enabled') === 'true';
   });
   const [zerodhaConfig, setZerodhaConfig] = useState(() => {
+    let saved = {};
     try {
-      const saved = localStorage.getItem('tredye.zerodha.config');
-      if (saved) return JSON.parse(saved);
+      const s = localStorage.getItem('tredye.zerodha.config');
+      if (s) saved = JSON.parse(s);
     } catch (e) {}
+
+    const envKey = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_API_KEY) || '';
+    const envSecret = (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_KITE_API_SECRET || import.meta.env?.KITE_API_SECRET)) || '';
+    const envToken = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_ACCESS_TOKEN) || '';
+
     return {
-      apiKey: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_API_KEY) || '',
-      apiSecret: (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_KITE_API_SECRET || import.meta.env?.KITE_API_SECRET)) || '',
-      accessToken: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_ACCESS_TOKEN) || '',
-      mode: 'full',
-      connectionMode: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_CONNECTION_MODE) || 'relay',
-      relayHost: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_RELAY_HOST) || ''
+      apiKey: saved.apiKey || envKey,
+      apiSecret: saved.apiSecret || envSecret,
+      accessToken: saved.accessToken || envToken,
+      mode: saved.mode || 'full',
+      connectionMode: saved.connectionMode || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_CONNECTION_MODE) || 'relay',
+      relayHost: saved.relayHost || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_RELAY_HOST) || ''
     };
   });
+
+  // Background auto-fetch Kite credentials from server/backend .env on startup
+  const fetchKiteCredentials = async () => {
+    try {
+      const res = await fetch('/api/kite/config');
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data.status === 'success') {
+        let mergedResult = null;
+        setZerodhaConfig(prev => {
+          const apiKey = data.apiKey || prev.apiKey || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_API_KEY) || '';
+          const apiSecret = data.apiSecret || prev.apiSecret || (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_KITE_API_SECRET || import.meta.env?.KITE_API_SECRET)) || '';
+          const accessToken = prev.accessToken || data.accessToken || (typeof import.meta !== 'undefined' && import.meta.env?.VITE_KITE_ACCESS_TOKEN) || '';
+          const relayHost = data.relayHost || prev.relayHost || '';
+
+          const merged = {
+            ...prev,
+            apiKey,
+            apiSecret,
+            accessToken,
+            relayHost
+          };
+
+          mergedResult = merged;
+          localStorage.setItem('tredye.zerodha.config', JSON.stringify(merged));
+          return merged;
+        });
+        return mergedResult;
+      }
+    } catch (e) {}
+    return null;
+  };
+
+  useEffect(() => {
+    fetchKiteCredentials();
+  }, []);
   const [zerodhaStatus, setZerodhaStatus] = useState('DISCONNECTED');
   const [zerodhaStatusMessage, setZerodhaStatusMessage] = useState('');
   const [zerodhaStats, setZerodhaStats] = useState({
@@ -486,24 +528,43 @@ export function MarketDataProvider({ children }) {
     };
   }, []);
 
-  const toggleZerodhaLive = (enable) => {
-    setIsZerodhaLive(enable);
-    localStorage.setItem('tredye.zerodha.enabled', String(enable));
+  const toggleZerodhaLive = async (enable) => {
+    const target = enable !== undefined ? Boolean(enable) : !isZerodhaLive;
 
-    if (enable) {
-      if (kiteServiceRef.current) {
-        kiteServiceRef.current.updateConfig(zerodhaConfig);
-        if (zerodhaConfig.apiKey && zerodhaConfig.accessToken) {
-          kiteServiceRef.current.connect();
-          showToast('Connecting Kite WebSocket', 'Handshaking with wss://ws.kite.trade...', 'info');
-        } else {
-          setZerodhaStatus('AUTH_REQUIRED');
-          setZerodhaStatusMessage('API Key and Access Token required');
-          setIsZerodhaModalOpen(true);
-          showToast('Credentials Required', 'Please enter your Kite API Key and Access Token', 'warning');
+    if (target) {
+      // Step 1: Ensure credentials are auto-fetched if missing
+      let key = zerodhaConfig.apiKey;
+      let secret = zerodhaConfig.apiSecret;
+      let token = zerodhaConfig.accessToken;
+
+      if (!key || !secret || !token) {
+        const fetched = await fetchKiteCredentials();
+        if (fetched) {
+          key = key || fetched.apiKey;
+          secret = secret || fetched.apiSecret;
+          token = token || fetched.accessToken;
         }
       }
+
+      setIsZerodhaLive(true);
+      localStorage.setItem('tredye.zerodha.enabled', 'true');
+
+      if (key && token) {
+        if (kiteServiceRef.current) {
+          kiteServiceRef.current.updateConfig({ apiKey: key, accessToken: token });
+          kiteServiceRef.current.connect();
+        }
+        showToast('⚡ Kite Live Connected', 'Streaming real-time binary ticks from Zerodha', 'success');
+        playAlertSound('success');
+      } else {
+        setZerodhaStatus('AUTH_REQUIRED');
+        setZerodhaStatusMessage('Daily access token required to stream live ticks');
+        setIsZerodhaModalOpen(true);
+        showToast('Daily Login Required', 'API Key & Secret auto-fetched! Click "1-Click Login to Zerodha" to stream live.', 'info');
+      }
     } else {
+      setIsZerodhaLive(false);
+      localStorage.setItem('tredye.zerodha.enabled', 'false');
       if (kiteServiceRef.current) {
         kiteServiceRef.current.disconnect();
       }
@@ -513,16 +574,30 @@ export function MarketDataProvider({ children }) {
   };
 
   const updateZerodhaConfig = (newConfig) => {
-    const merged = { ...zerodhaConfig, ...newConfig };
-    setZerodhaConfig(merged);
-    localStorage.setItem('tredye.zerodha.config', JSON.stringify(merged));
-    if (kiteServiceRef.current) {
-      kiteServiceRef.current.updateConfig(merged);
-      if (isZerodhaLive && merged.apiKey && merged.accessToken) {
-        kiteServiceRef.current.connect();
+    setZerodhaConfig(prev => {
+      // CRITICAL: NEVER overwrite existing valid apiKey or apiSecret with empty strings!
+      const apiKey = newConfig.apiKey?.trim() || prev.apiKey || '';
+      const apiSecret = newConfig.apiSecret?.trim() || prev.apiSecret || '';
+      const accessToken = newConfig.accessToken?.trim() || prev.accessToken || '';
+
+      const merged = {
+        ...prev,
+        ...newConfig,
+        apiKey,
+        apiSecret,
+        accessToken
+      };
+
+      localStorage.setItem('tredye.zerodha.config', JSON.stringify(merged));
+      if (kiteServiceRef.current) {
+        kiteServiceRef.current.updateConfig(merged);
+        if (isZerodhaLive && merged.apiKey && merged.accessToken) {
+          kiteServiceRef.current.connect();
+        }
       }
-    }
-    showToast('Kite Settings Saved', 'Configuration updated successfully', 'success');
+      return merged;
+    });
+    showToast('Kite Credentials Saved', 'API Key and Secret permanently preserved', 'success');
   };
 
   const startKiteSimulation = () => {
@@ -762,6 +837,7 @@ export function MarketDataProvider({ children }) {
         stopKiteSimulation,
         isKiteSimulating,
         generateKiteSession,
+        fetchKiteCredentials,
         // Data
         indices,
         vix,
