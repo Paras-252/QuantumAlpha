@@ -14,7 +14,8 @@ import {
   BookOpen,
   ArrowRight,
   TrendingUp,
-  X
+  X,
+  Zap
 } from 'lucide-react';
 
 export default function CommandPalette() {
@@ -45,6 +46,7 @@ export default function CommandPalette() {
 
   // Screens matching Tredye
   const screens = [
+    { id: 'signals', label: 'Quant Signals (Auto Trade & Predictive Models)', icon: Zap, cat: 'Screens', action: () => setCurrentScreen('signals') },
     { id: 'pulse', label: 'Pulse · Overview', icon: Activity, cat: 'Screens', action: () => { changePulseView('overview'); setCurrentScreen('pulse'); } },
     { id: 'pulse-flow', label: 'Pulse · Capital Flow', icon: TrendingUp, cat: 'Screens', action: () => changePulseView('flow') },
     { id: 'pulse-orderflow', label: 'Pulse · Orderflow & Depth', icon: Layers, cat: 'Screens', action: () => changePulseView('orderflow') },

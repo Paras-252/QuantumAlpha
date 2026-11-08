@@ -12,6 +12,7 @@ import ZerodhaConfigModal from './components/layout/ZerodhaConfigModal';
 
 // Views
 import PulseView from './views/PulseView';
+import SignalsView from './views/SignalsView';
 import OptionsView from './views/OptionsView';
 import OIFlowView from './views/OIFlowView';
 import LiquidityView from './views/LiquidityView';
@@ -30,6 +31,8 @@ function MainContent() {
     switch (currentScreen) {
       case 'pulse':
         return <PulseView />;
+      case 'signals':
+        return <SignalsView />;
       case 'options':
         return <OptionsView />;
       case 'oi-flow':

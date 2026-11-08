@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useMarketData } from '../context/MarketDataContext';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import PulseFlowView from '../components/pulse/PulseFlowView';
 import PulseOrderflowView from '../components/pulse/PulseOrderflowView';
+import AutoTradeModal from '../components/signals/AutoTradeModal';
+import { INITIAL_SIGNALS } from '../data/signalsData';
 import {
   Activity,
   TrendingUp,
@@ -14,7 +16,8 @@ import {
   Info,
   Clock,
   Sparkles,
-  ArrowUpRight
+  ArrowUpRight,
+  Zap
 } from 'lucide-react';
 
 export default function PulseView() {
@@ -27,8 +30,12 @@ export default function PulseView() {
     marketSubtext,
     pulseView,
     changePulseView,
+    setCurrentScreen,
     setActiveChartSymbol
   } = useMarketData();
+
+  const [topSignalModal, setTopSignalModal] = useState(false);
+  const topSignal = INITIAL_SIGNALS[0];
 
   // NIFTY and BANKNIFTY indexes
   const nifty = indices.find(i => i.symbol === 'NIFTY') || {
@@ -156,6 +163,49 @@ export default function PulseView() {
           <span>Market closed · showing last session's close</span>
         </div>
       </div>
+
+      {/* Institutional Top Signal Strip */}
+      {topSignal && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand/40 bg-brand/5 p-3 sm:px-4 shadow-sm">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <span className="flex h-2 w-2 rounded-full bg-brand animate-ping" />
+            <span className="inline-flex items-center gap-1 rounded-md bg-brand px-2 py-0.5 text-[11px] font-black text-white uppercase tracking-wider">
+              <Zap className="h-3 w-3 fill-white" />
+              <span>{topSignal.priorityGrade} Auto Signal</span>
+            </span>
+            <span className="font-mono text-xs font-bold text-foreground">
+              {topSignal.action} {topSignal.symbol} @ ₹{topSignal.entry.toLocaleString()}
+            </span>
+            <span className="text-muted-foreground text-xs font-mono">·</span>
+            <span className="text-xs font-mono text-rose-500 font-bold">
+              SL: ₹{topSignal.sl}
+            </span>
+            <span className="text-muted-foreground text-xs font-mono">·</span>
+            <span className="text-xs font-mono text-emerald-500 font-bold">
+              T1: ₹{topSignal.target1} ({topSignal.rrRatio})
+            </span>
+            <span className="text-xs text-muted-foreground font-semibold max-md:hidden">
+              · {topSignal.conviction}% Conviction ({topSignal.strategyName})
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setTopSignalModal(true)}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand/90 px-3 py-1 text-xs font-bold text-white transition-colors shadow-xs"
+            >
+              <span>1-Click Trade</span>
+            </button>
+            <button
+              onClick={() => setCurrentScreen('signals')}
+              className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline"
+            >
+              <span>All 6 Signals</span>
+              <ArrowRight className="h-3 w-3" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Render Subviews or Overview */}
       {pulseView === 'flow' ? (
@@ -834,6 +884,14 @@ export default function PulseView() {
             </div>
           </div>
         </>
+      )}
+
+      {topSignal && (
+        <AutoTradeModal
+          signal={topSignal}
+          isOpen={topSignalModal}
+          onClose={() => setTopSignalModal(false)}
+        />
       )}
     </div>
   );

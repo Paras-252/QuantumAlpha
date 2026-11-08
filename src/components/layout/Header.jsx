@@ -52,9 +52,10 @@ export default function Header() {
   const { user, isAuthenticated, logout, setIsAuthModalOpen } = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
-  // Removed crypto as requested
+  // Navigation items
   const navItems = [
     { id: 'pulse', label: 'Pulse', icon: Activity },
+    { id: 'signals', label: 'Signals', icon: Zap, isNew: true },
     { id: 'news', label: 'News', icon: Newspaper },
     { id: 'options', label: 'Options', icon: SlidersHorizontal },
     { id: 'radar', label: 'Radar', icon: Compass },
@@ -111,6 +112,11 @@ export default function Header() {
                   }`}
                 />
                 <span className="text-foreground">{item.label}</span>
+                {item.id === 'signals' && (
+                  <span className="ml-0.5 rounded-full bg-brand/20 text-brand px-1.5 py-0.2 text-[9px] font-black uppercase tracking-tighter">
+                    6 LIVE
+                  </span>
+                )}
                 {item.id === 'journal' && (
                   <span className="ml-0.5 size-1.5 rounded-full bg-up animate-pulse" />
                 )}
